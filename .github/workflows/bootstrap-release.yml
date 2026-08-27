@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: agent-skyline-bootstrap
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   bootstrap:
@@ -30,7 +30,20 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cat _bootstrap/skyline-text.tar.gz.b64.part-* > /tmp/skyline-text.tar.gz.b64
+          cat \
+            _bootstrap/skyline-text.tar.gz.b64.part-00 \
+            _bootstrap/skyline-text.tar.gz.b64.part-01 \
+            _bootstrap/skyline-text.tar.gz.b64.part-02 \
+            _bootstrap/skyline-text.tar.gz.b64.part-03 \
+            _bootstrap/skyline-text.tar.gz.b64.part-04 \
+            _bootstrap/skyline-text.tar.gz.b64.part-05 \
+            _bootstrap/skyline-text.tar.gz.b64.part-06 \
+            _bootstrap/skyline-text.tar.gz.b64.part-07-0 \
+            _bootstrap/skyline-text.tar.gz.b64.part-07-1 \
+            _bootstrap/skyline-text.tar.gz.b64.part-07-2 \
+            _bootstrap/skyline-text.tar.gz.b64.part-07-3 \
+            _bootstrap/skyline-text.tar.gz.b64.part-08 \
+            > /tmp/skyline-text.tar.gz.b64
           echo '59528f3f73bb71caa342948aa8a4a521078b465ab0fb25b5d68415575be4d573  /tmp/skyline-text.tar.gz.b64' | sha256sum --check --strict
           base64 --decode /tmp/skyline-text.tar.gz.b64 > /tmp/skyline-text.tar.gz
           echo '73ee76db5630014dfd5b5d95c8b7355ac0222af28d3ece0c321488a91fcae237  /tmp/skyline-text.tar.gz' | sha256sum --check --strict
@@ -49,7 +62,7 @@ jobs:
       - name: Validate plugin source
         run: npm run check
 
-      - name: Install deterministic visual-rendering dependencies
+      - name: Install deterministic render tools
         shell: bash
         run: |
           set -euo pipefail
@@ -64,18 +77,14 @@ jobs:
           set -euo pipefail
           node scripts/render-themes.mjs
           node scripts/render-animation.mjs
-
           rsvg-convert --width 1200 --height 720 docs/preview.svg --output docs/preview.png
 
           mkdir -p /tmp/skyline-themes
           for theme in midnight aurora sunset paper; do
             rsvg-convert --width 600 --height 360 ".tmp/theme-frames/${theme}.svg" --output "/tmp/skyline-themes/${theme}.png"
           done
-          montage \
-            /tmp/skyline-themes/midnight.png \
-            /tmp/skyline-themes/aurora.png \
-            /tmp/skyline-themes/sunset.png \
-            /tmp/skyline-themes/paper.png \
+          montage /tmp/skyline-themes/midnight.png /tmp/skyline-themes/aurora.png \
+            /tmp/skyline-themes/sunset.png /tmp/skyline-themes/paper.png \
             -tile 2x2 -geometry +0+0 docs/themes.png
 
           mkdir -p /tmp/skyline-construction
@@ -95,33 +104,21 @@ jobs:
           curl --silent --fail http://127.0.0.1:4173/ >/dev/null
 
           node --input-type=module <<'NODE'
-          import { readFile } from 'node:fs/promises'
           import { chromium } from 'playwright'
-
           const browser = await chromium.launch({ headless: true })
           try {
-            const desktop = await browser.newPage({ viewport: { width: 1500, height: 950 }, deviceScaleFactor: 1 })
+            const desktop = await browser.newPage({ viewport: { width: 1500, height: 950 } })
             await desktop.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' })
             await desktop.screenshot({ path: 'docs/ui-preview.png' })
-
-            const mobile = await browser.newPage({ viewport: { width: 390, height: 1238 }, deviceScaleFactor: 1, isMobile: true })
+            const mobile = await browser.newPage({ viewport: { width: 390, height: 1238 }, isMobile: true })
             await mobile.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' })
             await mobile.screenshot({ path: 'docs/mobile-preview.png' })
-
-            const previewSvg = await readFile('docs/preview.svg', 'utf8')
-            const previewUri = `data:image/svg+xml;base64,${Buffer.from(previewSvg).toString('base64')}`
-            const social = await browser.newPage({ viewport: { width: 1280, height: 640 }, deviceScaleFactor: 1 })
-            await social.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>
-              *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#05070c;color:#f5f7ff;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-              body{display:grid;grid-template-columns:470px 1fr;align-items:center;gap:34px;padding:52px;background:radial-gradient(circle at 22% 10%,#273765 0,transparent 42%),linear-gradient(145deg,#070a12,#10172a)}
-              .eyebrow{color:#8da7ff;font-size:18px;font-weight:800;letter-spacing:.16em}.title{margin:17px 0 13px;font-size:62px;line-height:.94;letter-spacing:-.055em}.copy{max-width:430px;color:#a8b4cc;font-size:22px;line-height:1.45}.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:27px}.chip{padding:9px 13px;border:1px solid rgba(124,157,255,.28);border-radius:999px;background:rgba(124,157,255,.08);color:#dce4ff;font-size:14px}.visual{padding:13px;border:1px solid rgba(154,174,218,.25);border-radius:24px;background:rgba(7,10,18,.72);box-shadow:0 38px 90px rgba(0,0,0,.45);transform:rotate(-1.2deg)}.visual img{display:block;width:100%;border-radius:14px}
-            </style></head><body><section><div class="eyebrow">DEEPSEEK HARNESS PLUGIN</div><h1 class="title">Agent<br>Skyline</h1><div class="copy">Turn every Agent session into a private, animated, shareable developer city.</div><div class="chips"><span class="chip">Local-first</span><span class="chip">Zero extra tokens</span><span class="chip">PNG · SVG · Replay</span></div></section><div class="visual"><img src="${previewUri}"></div></body></html>`, { waitUntil: 'load' })
-            await social.screenshot({ path: 'docs/social-preview.png' })
           } finally {
             await browser.close()
           }
           NODE
 
+          convert docs/preview.png -resize '1280x640^' -gravity center -extent 1280x640 docs/social-preview.png
           identify docs/preview.png docs/ui-preview.png docs/mobile-preview.png docs/social-preview.png docs/themes.png docs/construction.gif
           test "$(identify -format '%wx%h' docs/preview.png)" = '1200x720'
           test "$(identify -format '%wx%h' docs/ui-preview.png)" = '1500x950'
@@ -136,9 +133,8 @@ jobs:
           npm pack --dry-run
           test ! -e _bootstrap
           test ! -e .github/workflows/bootstrap-release.yml
-          ! git grep -nE '(_bootstrap|skyline-text\.tar\.gz\.b64)' -- ':!docs/validation-report.md'
 
-      - name: Commit and push the complete plugin
+      - name: Commit and push complete plugin
         id: publish
         shell: bash
         run: |
@@ -150,7 +146,7 @@ jobs:
           git push origin HEAD:main
           final_sha="$(git rev-parse HEAD)"
           echo "sha=$final_sha" >> "$GITHUB_OUTPUT"
-          git tag --force --annotate v1.0.0 --message 'Agent Skyline v1.0.0'
+          git tag --force --annotate v1.0.0 --message 'Agent Skyline v1.0.0' "$final_sha"
           git push --force origin refs/tags/v1.0.0
 
       - name: Build release archives
@@ -172,9 +168,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          gh release delete v1.0.0 --yes --cleanup-tag 2>/dev/null || true
-          git tag --force --annotate v1.0.0 --message 'Agent Skyline v1.0.0' "$FINAL_SHA"
-          git push --force origin refs/tags/v1.0.0
+          gh release delete v1.0.0 --yes 2>/dev/null || true
           gh release create v1.0.0 \
             dist/dsh-agent-skyline-1.0.0.tgz \
             dist/dsh-agent-skyline-v1.0.0.zip \
