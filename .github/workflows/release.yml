@@ -1,5 +1,6 @@
 name: Publish Agent Skyline release
 
+# A workflow-file change intentionally rebuilds the pinned release assets.
 on:
   push:
     branches: [main]

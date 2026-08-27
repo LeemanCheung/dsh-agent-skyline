@@ -11,7 +11,7 @@ Every DeepSeek Harness Agent session can now become a deterministic developer ci
 - Stable city identity, City ID, archetype, district, and unlockable landmarks
 - Phoenix Tower for successful recovery after failure
 - Local-only persistence with no server, telemetry, database, or extra model call
-- Interactive browser demo powered by the same production city core
+- Interactive browser demo source powered by the same production city core
 - Responsive desktop/mobile UI and a lean 45.8 KB install package
 
 ## Privacy boundary
@@ -24,4 +24,4 @@ Prompts, replies, commands, arguments, file paths, workspace names, credentials,
 dsh plugin --profile web add "github:LeemanCheung/dsh-agent-skyline#v1.0.0"
 ```
 
-Try the interactive demo at `https://leemancheung.github.io/dsh-agent-skyline/`. Then confirm the plugin in **Settings → Plugins** and open **Agent Skyline** from a Session header.
+Confirm the plugin in **Settings → Plugins** and open **Agent Skyline** from a Session header. To preview the standalone browser demo, run `npm run demo`, serve the `demo/` directory locally, and open it in a modern browser.

@@ -17,7 +17,7 @@
 
 ![Agent Skyline 建城回放](docs/construction.gif)
 
-[在线交互演示](https://leemancheung.github.io/dsh-agent-skyline/) · [English README](README.md) · [选题分析](docs/market-analysis.zh-CN.md) · [首发方案](docs/launch-playbook.zh-CN.md)
+[本地交互演示源码](demo/) · [English README](README.md) · [选题分析](docs/market-analysis.zh-CN.md) · [首发方案](docs/launch-playbook.zh-CN.md)
 
 ## 为什么它更有传播潜力
 
@@ -80,6 +80,15 @@ dsh plugin --profile web add "github:LeemanCheung/dsh-agent-skyline#v1.0.0"
 ```
 
 随后在 DSH Web 的 **Settings → Plugins** 中确认 `dsh-agent-skyline` 已启用。插件包已声明 `dsh.bundle.patch`，会在 Web Profile 中注册客户端入口。
+
+如需先独立预览浏览器演示：
+
+```bash
+npm run demo
+python3 -m http.server 4173 --directory demo
+```
+
+随后打开 `http://127.0.0.1:4173/`。
 
 ## 使用
 
@@ -179,7 +188,7 @@ scripts/build.mjs
 仓库已包含一套可直接执行的发布方案：
 
 - [`docs/launch-playbook.zh-CN.md`](docs/launch-playbook.zh-CN.md)：首发节奏、内容模板、指标与迭代机制；
-- [在线交互演示](https://leemancheung.github.io/dsh-agent-skyline/)：使用真实核心逻辑，可切换范围、主题、回放和导出；
+- [`demo/`](demo/)：使用真实核心逻辑的浏览器交互演示源码，可切换范围、主题、回放和导出；
 - [`docs/ui-preview.png`](docs/ui-preview.png)：完整桌面产品界面；
 - [`docs/mobile-preview.png`](docs/mobile-preview.png)：390px 响应式产品界面；
 - [`docs/preview.png`](docs/preview.png)：完整导出卡片；

@@ -17,7 +17,7 @@ It is designed as a visual product with a built-in sharing loop rather than anot
 
 ![Construction replay](docs/construction.gif)
 
-[Interactive demo](https://leemancheung.github.io/dsh-agent-skyline/) · [中文说明](README.zh-CN.md) · [Market analysis](docs/market-analysis.zh-CN.md) · [Launch playbook](docs/launch-playbook.zh-CN.md)
+[Interactive demo source](demo/) · [中文说明](README.zh-CN.md) · [Market analysis](docs/market-analysis.zh-CN.md) · [Launch playbook](docs/launch-playbook.zh-CN.md)
 
 ## Install
 
@@ -27,6 +27,15 @@ dsh plugin --profile web add "github:LeemanCheung/dsh-agent-skyline#v1.0.0"
 ```
 
 Confirm the plugin in **Settings → Plugins**, then open any Session and select **Agent Skyline** in the conversation header.
+
+To preview the standalone browser demo locally:
+
+```bash
+npm run demo
+python3 -m http.server 4173 --directory demo
+```
+
+Then open `http://127.0.0.1:4173/`.
 
 ## Four visual climates
 
@@ -95,7 +104,7 @@ scripts/build.mjs
 
 ## Launch assets
 
-- [Interactive GitHub Pages demo](https://leemancheung.github.io/dsh-agent-skyline/) — range/theme/replay/export controls backed by the real core
+- [`demo/`](demo/) — interactive browser demo source backed by the production city core
 - [`docs/ui-preview.png`](docs/ui-preview.png) — complete desktop interface
 - [`docs/mobile-preview.png`](docs/mobile-preview.png) — 390 px responsive interface
 - [`docs/preview.png`](docs/preview.png) — full export card
