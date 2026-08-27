@@ -12,11 +12,27 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm run check
-      - run: npm pack --dry-run
+      - name: Validate source
+        run: npm run check
+      - name: Verify package contents
+        run: npm pack --dry-run
+      - name: Build tracked-source snapshot
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: git archive --format=zip --output=/tmp/dsh-agent-skyline-source.zip HEAD
+      - name: Upload tracked-source snapshot
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dsh-agent-skyline-source-${{ github.sha }}
+          path: /tmp/dsh-agent-skyline-source.zip
+          if-no-files-found: error
+          retention-days: 1

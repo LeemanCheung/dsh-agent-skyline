@@ -1,16 +1,14 @@
 name: Publish Agent Skyline release
 
-# A workflow-file change intentionally rebuilds the pinned release assets.
 on:
   push:
-    branches: [main]
-    paths:
-      - '.github/workflows/release.yml'
+    tags:
+      - 'v*.*.*'
   workflow_dispatch:
     inputs:
       tag:
-        description: Release tag
-        required: true
+        description: Existing or new release tag (must match package.json)
+        required: false
         default: v1.0.0
         type: string
 
@@ -18,7 +16,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: agent-skyline-release
+  group: agent-skyline-release-${{ github.ref_name }}
   cancel-in-progress: false
 
 jobs:
@@ -37,12 +35,19 @@ jobs:
         run: npm run check
       - name: Build release files
         id: files
+        env:
+          INPUT_TAG: ${{ inputs.tag }}
+          REF_TAG: ${{ github.ref_name }}
         shell: bash
         run: |
           set -euo pipefail
-          tag='${{ inputs.tag }}'
-          tag="${tag:-v1.0.0}"
+          tag="${INPUT_TAG:-$REF_TAG}"
           version="$(node -p "JSON.parse(require('fs').readFileSync('package.json','utf8')).version")"
+          expected_tag="v${version}"
+          if [ "$tag" != "$expected_tag" ]; then
+            echo "Release tag $tag does not match package version $version ($expected_tag)." >&2
+            exit 1
+          fi
           mkdir -p dist
           npm pack --pack-destination dist
           zip="dist/dsh-agent-skyline-${tag}.zip"
@@ -64,19 +69,32 @@ jobs:
           TAG: ${{ steps.files.outputs.tag }}
           VERSION: ${{ steps.files.outputs.version }}
           ZIP_FILE: ${{ steps.files.outputs.zip }}
+          EVENT_NAME: ${{ github.event_name }}
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          gh release delete "$TAG" --yes 2>/dev/null || true
-          git tag --delete "$TAG" 2>/dev/null || true
-          git tag --annotate "$TAG" --message "Agent Skyline ${TAG}" "$GITHUB_SHA"
-          git push --force origin "refs/tags/$TAG"
-          notes=(--generate-notes)
-          if [ "$TAG" = 'v1.0.0' ] && [ -f docs/release-notes-v1.0.0.md ]; then
-            notes=(--notes-file docs/release-notes-v1.0.0.md)
+
+          if [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
+            gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
+            git tag --delete "$TAG" 2>/dev/null || true
+            git tag --annotate "$TAG" --message "Agent Skyline ${TAG}" "$GITHUB_SHA"
+            git push --force origin "refs/tags/$TAG"
+          else
+            git rev-parse --verify "refs/tags/$TAG" >/dev/null
+            if gh release view "$TAG" >/dev/null 2>&1; then
+              echo "Release $TAG already exists; refusing to overwrite it on a tag push." >&2
+              exit 1
+            fi
           fi
+
+          notes=(--generate-notes)
+          notes_file="docs/release-notes-${TAG}.md"
+          if [ -f "$notes_file" ]; then
+            notes=(--notes-file "$notes_file")
+          fi
+
           gh release create "$TAG" \
             "dist/dsh-agent-skyline-${VERSION}.tgz" \
             "$ZIP_FILE" \
