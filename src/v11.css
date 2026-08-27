@@ -1,0 +1,235 @@
+.sky-v11 {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  margin: 10px 18px 14px;
+  padding: 15px 16px;
+  border: 1px solid color-mix(in srgb, var(--sky-accent, #7c9dff) 25%, transparent);
+  border-radius: 18px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--sky-accent, #7c9dff) 8%, transparent), rgba(8, 12, 22, .72));
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .16);
+  isolation: isolate;
+}
+
+.sky-v11::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(circle at 8% 0%, rgba(124, 157, 255, .14), transparent 38%);
+  pointer-events: none;
+}
+
+.sky-v11-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sky-v11-heading > div:first-child {
+  display: grid;
+  gap: 3px;
+}
+
+.sky-v11-heading span {
+  color: #8da7ff;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .14em;
+}
+
+.sky-v11-heading strong {
+  color: inherit;
+  font-size: 15px;
+  letter-spacing: -.015em;
+}
+
+.sky-v11-landmark {
+  max-width: 46%;
+  color: color-mix(in srgb, currentColor 56%, transparent);
+  font-size: 10px;
+  line-height: 1.45;
+  letter-spacing: .06em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.sky-v11-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.sky-v11-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 9px;
+  border: 1px solid rgba(137, 165, 255, .18);
+  border-radius: 999px;
+  background: rgba(124, 157, 255, .07);
+  color: color-mix(in srgb, currentColor 72%, transparent);
+  font-size: 11px;
+}
+
+.sky-v11-chip b {
+  color: #9bb0ff;
+  font-size: 9px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.sky-v11-chip.is-muted {
+  opacity: .62;
+}
+
+.sky-v11-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sky-v11-action {
+  appearance: none;
+  padding: 8px 11px;
+  border: 1px solid rgba(145, 164, 212, .22);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, .045);
+  color: inherit;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 720;
+  cursor: pointer;
+  transition: transform .16s ease, border-color .16s ease, background .16s ease;
+}
+
+.sky-v11-action:hover {
+  border-color: rgba(141, 167, 255, .55);
+  background: rgba(124, 157, 255, .11);
+  transform: translateY(-1px);
+}
+
+.sky-v11-action:focus-visible {
+  outline: 2px solid #8da7ff;
+  outline-offset: 2px;
+}
+
+.sky-v11-action.is-primary {
+  border-color: rgba(124, 157, 255, .5);
+  background: linear-gradient(135deg, rgba(82, 112, 220, .92), rgba(113, 82, 203, .92));
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(74, 92, 184, .22);
+}
+
+.sky-v11-toast {
+  position: absolute;
+  right: 16px;
+  bottom: -7px;
+  z-index: 20;
+  max-width: min(360px, 80%);
+  padding: 9px 12px;
+  border: 1px solid rgba(133, 158, 235, .3);
+  border-radius: 11px;
+  background: #111827;
+  color: #f4f7ff;
+  font-size: 11px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, .38);
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: .2s ease;
+}
+
+.sky-v11-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sky-v11-toast[data-tone="error"] {
+  border-color: rgba(255, 111, 145, .48);
+  color: #ffd6df;
+}
+
+.sky-v11-seed-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 18px 14px;
+  padding: 14px 16px;
+  border: 1px solid rgba(101, 230, 180, .24);
+  border-radius: 16px;
+  background: rgba(101, 230, 180, .07);
+}
+
+.sky-v11-seed-preview > div {
+  display: grid;
+  gap: 3px;
+}
+
+.sky-v11-seed-preview span {
+  color: #65e6b4;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .13em;
+}
+
+.sky-v11-seed-preview strong {
+  font-size: 14px;
+}
+
+.sky-v11-seed-preview small {
+  font-size: 11px;
+  opacity: .62;
+}
+
+.sky-v11-seed-preview button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: .6;
+}
+
+@media (max-width: 680px) {
+  .sky-v11 {
+    margin: 8px 10px 12px;
+    padding: 13px;
+  }
+
+  .sky-v11-heading {
+    display: grid;
+  }
+
+  .sky-v11-landmark {
+    max-width: none;
+    text-align: left;
+  }
+
+  .sky-v11-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sky-v11-action {
+    width: 100%;
+  }
+
+  .sky-v11-seed-preview {
+    margin-inline: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky-v11-action,
+  .sky-v11-toast {
+    transition: none;
+  }
+
+  .sky-v11-action:hover {
+    transform: none;
+  }
+}
