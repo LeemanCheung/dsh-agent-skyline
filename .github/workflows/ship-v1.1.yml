@@ -1,0 +1,159 @@
+name: Ship Agent Skyline v1.1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ship-v1.1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: agent-skyline-v1-1-ship
+  cancel-in-progress: false
+
+jobs:
+  ship:
+    if: github.repository == 'LeemanCheung/dsh-agent-skyline'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout complete repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate v1.1 source and assets
+        run: node scripts/finalize-v11.mjs
+
+      - name: Validate source, privacy boundary, bundle and package
+        run: |
+          set -euo pipefail
+          npm run check
+          npm pack --dry-run
+
+      - name: Install deterministic browser renderer
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save --package-lock=false playwright
+          npx playwright install --with-deps chromium
+
+      - name: Render desktop and mobile v1.1 product previews
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run demo
+          python3 -m http.server 4173 --directory demo >/tmp/agent-skyline-v11-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            curl --silent --fail http://127.0.0.1:4173/ >/dev/null && break
+            sleep 1
+          done
+          curl --silent --fail http://127.0.0.1:4173/ >/dev/null
+          node --input-type=module <<'NODE'
+          import { chromium } from 'playwright'
+          const browser = await chromium.launch({ headless: true })
+          try {
+            const desktop = await browser.newPage({ viewport: { width: 1500, height: 950 }, deviceScaleFactor: 1 })
+            await desktop.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' })
+            await desktop.waitForSelector('.sky-v11', { timeout: 10_000 })
+            await desktop.screenshot({ path: 'docs/v11-preview.png', fullPage: true })
+            const mobile = await browser.newPage({ viewport: { width: 390, height: 1238 }, deviceScaleFactor: 1, isMobile: true })
+            await mobile.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' })
+            await mobile.waitForSelector('.sky-v11', { timeout: 10_000 })
+            await mobile.screenshot({ path: 'docs/v11-mobile-preview.png', fullPage: true })
+            const diagnostics = await desktop.evaluate(() => ({
+              version: window.AgentSkylineV11?.version,
+              privacy: window.AgentSkylineV11?.privacy,
+              actions: [...document.querySelectorAll('.sky-v11-action')].map(node => node.textContent),
+              ecosystem: window.AgentSkylineV11?.readEcosystem?.(),
+            }))
+            console.log(JSON.stringify(diagnostics))
+            if (diagnostics.version !== '1.1.0' || diagnostics.privacy !== 'aggregate-only') throw new Error('v1.1 browser bridge was not installed')
+            if (diagnostics.actions.length !== 4) throw new Error(`expected 4 v1.1 actions, received ${diagnostics.actions.length}`)
+          } finally {
+            await browser.close()
+          }
+          NODE
+          test -s docs/v11-preview.png
+          test -s docs/v11-mobile-preview.png
+
+      - name: Revalidate generated repository
+        run: |
+          set -euo pipefail
+          npm run check
+          npm pack --dry-run
+          test "$(node -p "JSON.parse(require('fs').readFileSync('package.json','utf8')).version")" = '1.1.0'
+          ! git grep -nE '(TOP-SECRET-PROMPT|Authorization: Bearer|/private/)' -- ':!scripts/ecosystem.test.mjs'
+
+      - name: Commit and push v1.1 to main
+        id: publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'feat: launch Agent Skyline v1.1 local ecosystem'
+          git push origin HEAD:main
+          final_sha="$(git rev-parse HEAD)"
+          echo "sha=$final_sha" >> "$GITHUB_OUTPUT"
+          echo "Published source commit: $final_sha"
+
+      - name: Build signed-off release files
+        id: release_files
+        shell: bash
+        run: |
+          set -euo pipefail
+          final_sha='${{ steps.publish.outputs.sha }}'
+          rm -rf dist
+          mkdir -p dist
+          npm pack --pack-destination dist
+          git archive --format=zip --output=dist/dsh-agent-skyline-v1.1.0.zip "$final_sha"
+          cp docs/social-preview.png dist/agent-skyline-social-preview.png
+          cp docs/construction.gif dist/agent-skyline-construction.gif
+          cp docs/v11-preview.png dist/agent-skyline-v1.1-preview.png
+          cp docs/v11-mobile-preview.png dist/agent-skyline-v1.1-mobile-preview.png
+          (cd dist && sha256sum * > SHA256SUMS.txt)
+          cat dist/SHA256SUMS.txt
+
+      - name: Tag and publish v1.1.0
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FINAL_SHA: ${{ steps.publish.outputs.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          gh release delete v1.1.0 --yes 2>/dev/null || true
+          git tag --delete v1.1.0 2>/dev/null || true
+          git tag --force --annotate v1.1.0 --message 'Agent Skyline v1.1.0' "$FINAL_SHA"
+          git push --force origin refs/tags/v1.1.0
+          gh release create v1.1.0 \
+            dist/dsh-agent-skyline-1.1.0.tgz \
+            dist/dsh-agent-skyline-v1.1.0.zip \
+            dist/agent-skyline-social-preview.png \
+            dist/agent-skyline-construction.gif \
+            dist/agent-skyline-v1.1-preview.png \
+            dist/agent-skyline-v1.1-mobile-preview.png \
+            dist/SHA256SUMS.txt \
+            --target "$FINAL_SHA" \
+            --title 'Agent Skyline v1.1.0' \
+            --notes-file docs/release-notes-v1.1.0.md
+
+      - name: Request independent main-branch CI verification
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: gh workflow run ci.yml --ref main || true
