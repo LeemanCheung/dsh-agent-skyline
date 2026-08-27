@@ -48,7 +48,7 @@ jobs:
           base64 --decode /tmp/skyline-text.tar.gz.b64 > /tmp/skyline-text.tar.gz
           echo '73ee76db5630014dfd5b5d95c8b7355ac0222af28d3ece0c321488a91fcae237  /tmp/skyline-text.tar.gz' | sha256sum --check --strict
           tar --extract --gzip --file /tmp/skyline-text.tar.gz --directory .
-          rm -rf _bootstrap
+          rm -rf _bootstrap bootstrap
           rm -f .github/workflows/bootstrap-release.yml
           test -f package.json
           test -f src/core.js
@@ -132,6 +132,7 @@ jobs:
           npm run check
           npm pack --dry-run
           test ! -e _bootstrap
+          test ! -e bootstrap
           test ! -e .github/workflows/bootstrap-release.yml
 
       - name: Commit and push complete plugin
@@ -139,11 +140,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          start_sha="$(git rev-parse HEAD)"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
           git commit -m 'feat: launch privacy-first Agent Skyline plugin'
-          git push origin HEAD:main
+          git push --force-with-lease=refs/heads/main:$start_sha origin HEAD:main
           final_sha="$(git rev-parse HEAD)"
           echo "sha=$final_sha" >> "$GITHUB_OUTPUT"
           git tag --force --annotate v1.0.0 --message 'Agent Skyline v1.0.0' "$final_sha"
