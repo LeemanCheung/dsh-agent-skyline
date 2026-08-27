@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="340" viewBox="0 0 1120 340">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0a1020"/><stop offset="1" stop-color="#121a2d"/></linearGradient></defs>
+<rect width="1120" height="340" rx="24" fill="url(#g)"/>
+<style>text{font-family:Inter,system-ui,sans-serif}.t{fill:#f4f7ff;font-weight:700}.s{fill:#8d9bb4;font-size:13px}.box{fill:#10182a;stroke:#273552;stroke-width:1.5}.a{fill:#7c9dff}.line{stroke:#50648e;stroke-width:2;fill:none}</style>
+<g transform="translate(44 76)"><rect class="box" width="205" height="180" rx="18"/><text class="t" x="24" y="38" font-size="17">DSH Session</text><text class="s" x="24" y="72">chat.nodes projection</text><text class="s" x="24" y="100">kind · state · time</text><text class="s" x="24" y="128">tool category only</text><circle class="a" cx="178" cy="34" r="7"/></g>
+<path class="line" d="M249 166h92"/><path d="m333 158 12 8-12 8" fill="#50648e"/>
+<g transform="translate(345 76)"><rect class="box" width="205" height="180" rx="18"/><text class="t" x="24" y="38" font-size="17">Privacy Reducer</text><text class="s" x="24" y="72">drops prompts &amp; replies</text><text class="s" x="24" y="100">drops args &amp; paths</text><text class="s" x="24" y="128">stores coarse metrics</text><path d="M171 24h14v14h-14z" fill="none" stroke="#65e6b4" stroke-width="2"/></g>
+<path class="line" d="M550 166h92"/><path d="m634 158 12 8-12 8" fill="#50648e"/>
+<g transform="translate(646 76)"><rect class="box" width="205" height="180" rx="18"/><text class="t" x="24" y="38" font-size="17">City Generator</text><text class="s" x="24" y="72">deterministic layout</text><text class="s" x="24" y="100">landmarks &amp; identity</text><text class="s" x="24" y="128">session / day / legacy</text><path d="M168 42v-18h18v18m-14 0V31h10v11" fill="none" stroke="#ffb86b" stroke-width="2"/></g>
+<path class="line" d="M851 166h76"/><path d="m919 158 12 8-12 8" fill="#50648e"/>
+<g transform="translate(931 76)"><rect class="box" width="145" height="180" rx="18"/><text class="t" x="20" y="38" font-size="17">Exports</text><text class="s" x="20" y="72">live replay</text><text class="s" x="20" y="100">PNG / SVG</text><text class="s" x="20" y="128">share caption</text><path d="M116 23v28m0 0 9-9m-9 9-9-9" fill="none" stroke="#7c9dff" stroke-width="2"/></g>
+<text x="44" y="42" class="t" font-size="20">Local-first architecture</text><text x="1076" y="308" text-anchor="end" class="s">No server · no telemetry · no extra token cost</text>
+</svg>

@@ -1,0 +1,44 @@
+name: Privacy or security concern
+description: Report a possible content leak, unsafe export, or storage boundary violation.
+title: "[Privacy]: "
+labels: [security, privacy]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not disclose real secrets in a public issue. For an exploitable vulnerability, use GitHub Security Advisories instead. Public reports must use synthetic strings only.
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Suspected surface
+      options:
+        - Normalized event model
+        - localStorage history
+        - SVG export
+        - PNG export
+        - Share caption
+        - Project label handling
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Explain the suspected boundary violation without including real confidential data.
+    validations:
+      required: true
+  - type: textarea
+    id: synthetic-repro
+    attributes:
+      label: Synthetic reproduction
+      description: Use unmistakably fake prompts, paths, and tokens.
+    validations:
+      required: true
+  - type: checkboxes
+    id: disclosure
+    attributes:
+      label: Disclosure
+      options:
+        - label: This report contains synthetic data only.
+          required: true

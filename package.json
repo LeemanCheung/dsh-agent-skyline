@@ -1,0 +1,92 @@
+{
+  "name": "dsh-agent-skyline",
+  "version": "1.0.0",
+  "description": "Turn every DeepSeek Harness Agent session into a private, animated, shareable procedural city.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./core": "./src/core.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh-CN.md",
+    "CHANGELOG.md",
+    "SECURITY.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test scripts/*.test.mjs",
+    "demo": "node scripts/render-demo.mjs",
+    "check": "node --check src/client.js && node --check src/core.js && node --check demo/app.js && npm test && npm run build && node --check lib/client.js && node --check demo/core.js && node scripts/smoke.mjs && npm run demo",
+    "prepublishOnly": "npm run check"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ],
+      "platform": "web"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeemanCheung/dsh-agent-skyline.git"
+  },
+  "homepage": "https://leemancheung.github.io/dsh-agent-skyline/",
+  "bugs": {
+    "url": "https://github.com/LeemanCheung/dsh-agent-skyline/issues"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "agent",
+    "skyline",
+    "generative-art",
+    "visualization",
+    "gamification",
+    "privacy",
+    "share-card",
+    "procedural-generation",
+    "procedural-city",
+    "developer-city",
+    "local-first",
+    "shareable"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-client-locale": "*",
+    "@deepseek-ai/dsh-client-runtime": "*",
+    "@deepseek-ai/dsh-client-ui-conversation": "*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-client-locale": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-runtime": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-conversation": {
+      "optional": true
+    }
+  },
+  "license": "MIT",
+  "author": "Leeman Cheung"
+}

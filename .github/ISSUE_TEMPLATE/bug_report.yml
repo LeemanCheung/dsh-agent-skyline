@@ -1,0 +1,58 @@
+name: Bug report
+description: Report an installation, rendering, persistence, or export problem.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve Agent Skyline. Use synthetic examples only; never paste private prompts, commands, paths, credentials, or business data.
+  - type: input
+    id: dsh-version
+    attributes:
+      label: DSH version
+      placeholder: e.g. 0.x.x
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Installation / activation
+        - Session signal classification
+        - Replay / animation
+        - Today / 7-day / all-history aggregation
+        - PNG / SVG export
+        - Responsive layout
+        - Localization
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Describe the steps using public or synthetic data.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or screen recording
+      description: Remove prompts, file paths, usernames, and other sensitive content before uploading.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Safety checks
+      options:
+        - label: I removed private prompts, paths, commands, credentials, and proprietary data.
+          required: true
+        - label: I checked the latest release and existing issues.
+          required: true

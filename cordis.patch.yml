@@ -1,0 +1,4 @@
+# Local-first generative Agent skyline for the DSH Web profile.
+- insert:
+    - id: agent-skyline
+      name: 'dsh-agent-skyline'
