@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#070a12"/><stop offset="1" stop-color="#17203a"/></linearGradient>
+    <radialGradient id="g"><stop stop-color="#7c9dff" stop-opacity=".34"/><stop offset="1" stop-color="#7c9dff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="180" cy="70" r="440" fill="url(#g)"/>
+  <text x="72" y="78" fill="#8da7ff" font-family="Inter,Segoe UI,sans-serif" font-size="17" font-weight="800" letter-spacing="3">AGENT SKYLINE · V1.1</text>
+  <text x="72" y="146" fill="#f5f7ff" font-family="Inter,Segoe UI,sans-serif" font-size="56" font-weight="850">Local ecosystem.</text>
+  <text x="72" y="206" fill="#f5f7ff" font-family="Inter,Segoe UI,sans-serif" font-size="56" font-weight="850">Portable cities.</text>
+  <text x="72" y="250" fill="#9daac4" font-family="Inter,Segoe UI,sans-serif" font-size="20">9:16 cards · city seeds · README badges · seasonal landmarks</text>
+  <g transform="translate(72 310)">
+    <rect width="470" height="286" rx="30" fill="#0c1220" stroke="#7c9dff" stroke-opacity=".28"/>
+    <text x="26" y="42" fill="#8da7ff" font-family="Inter,Segoe UI,sans-serif" font-size="13" font-weight="800">LOCAL ECOSYSTEM</text>
+    <g fill="#15213a" stroke="#7c9dff" stroke-opacity=".18"><rect x="26" y="66" width="202" height="48" rx="24"/><rect x="240" y="66" width="202" height="48" rx="24"/></g>
+    <text x="45" y="96" fill="#dce4ff" font-family="Inter,Segoe UI,sans-serif" font-size="14">Task DAG · 18 nodes</text>
+    <text x="260" y="96" fill="#dce4ff" font-family="Inter,Segoe UI,sans-serif" font-size="14">Token · 186K</text>
+    <path d="M42 238V174l54-34 52 28 68-88 74 80 56-35 72 49v64H42Z" fill="#7c9dff" opacity=".12"/>
+    <path d="M42 238h376M96 214v-74m52 74v-46m68 46V80m74 134v-54m56 54v-89" fill="none" stroke="#7c9dff" stroke-width="11" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(602 58)">
+    <rect width="590" height="604" rx="34" fill="#0a0f1b" stroke="#91a7ef" stroke-opacity=".25"/>
+    <rect x="24" y="24" width="542" height="110" rx="22" fill="#111a2c"/>
+    <text x="49" y="59" fill="#8da7ff" font-family="Inter,Segoe UI,sans-serif" font-size="12" font-weight="800" letter-spacing="2">V1.1 · LOCAL ECOSYSTEM</text>
+    <text x="49" y="91" fill="#f5f7ff" font-family="Inter,Segoe UI,sans-serif" font-size="21" font-weight="750">Share wider. Reveal less.</text>
+    <g transform="translate(49 105)" fill="#19243c"><rect width="140" height="22" rx="11"/><rect x="150" width="142" height="22" rx="11"/></g>
+    <g transform="translate(24 154)">
+      <rect width="542" height="330" rx="24" fill="#080c16"/>
+      <path d="M48 280V205l65-35 58 26 76-112 82 105 66-42 92 58v75H48Z" fill="#7c9dff" opacity=".14"/>
+      <g fill="#7c9dff"><rect x="86" y="166" width="42" height="114" rx="7"/><rect x="155" y="196" width="52" height="84" rx="7"/><rect x="237" y="84" width="58" height="196" rx="8"/><rect x="329" y="181" width="48" height="99" rx="7"/><rect x="413" y="147" width="52" height="133" rx="7"/></g>
+    </g>
+    <g transform="translate(24 505)" fill="#141e34" stroke="#8da7ff" stroke-opacity=".28"><rect width="124" height="46" rx="13"/><rect x="136" width="124" height="46" rx="13"/><rect x="272" width="124" height="46" rx="13"/><rect x="408" width="134" height="46" rx="13"/></g>
+    <g fill="#dce4ff" font-family="Inter,Segoe UI,sans-serif" font-size="12" text-anchor="middle"><text x="86" y="534">9:16 PNG</text><text x="222" y="534">CITY SEED</text><text x="358" y="534">IMPORT</text><text x="499" y="534">README BADGE</text></g>
+  </g>
+  <text x="72" y="670" fill="#71809e" font-family="Inter,Segoe UI,sans-serif" font-size="16">Private by construction · no server · no telemetry · zero extra model calls</text>
+</svg>
