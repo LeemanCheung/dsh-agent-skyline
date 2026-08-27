@@ -27,8 +27,10 @@ jobs:
           node-version: 22
       - name: Validate and build
         run: npm run check
-      - name: Configure Pages
+      - name: Enable and configure Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Upload demo
         uses: actions/upload-pages-artifact@v3
         with:
