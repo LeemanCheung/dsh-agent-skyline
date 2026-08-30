@@ -3,52 +3,50 @@
   align-items: center;
   color: inherit;
 }
-
 .dsh-skyline-trigger {
-  --sky-accent: #7c9dff;
+  --sky-accent: var(--dsw-static-deepseek-500, #4d6bfe);
   position: relative;
   display: inline-flex;
+  min-height: 32px;
+  padding: 6px 10px;
   align-items: center;
   gap: 7px;
-  min-height: 30px;
-  padding: 5px 9px;
-  border: 1px solid color-mix(in srgb, currentColor 13%, transparent);
-  border-radius: 9px;
-  background: color-mix(in srgb, var(--sky-accent) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--sky-accent) 18%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--sky-accent) 7%, transparent);
   color: inherit;
   font: inherit;
   font-size: 12px;
   line-height: 1;
   cursor: pointer;
-  transition: border-color .18s ease, background .18s ease, transform .18s ease, box-shadow .18s ease;
+  transition:
+    border-color 0.16s ease,
+    background-color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.16s ease;
 }
-
 .dsh-skyline-trigger:hover {
-  border-color: color-mix(in srgb, var(--sky-accent) 45%, transparent);
+  border-color: color-mix(in srgb, var(--sky-accent) 36%, transparent);
   background: color-mix(in srgb, var(--sky-accent) 11%, transparent);
-  box-shadow: 0 8px 24px color-mix(in srgb, var(--sky-accent) 13%, transparent);
+  box-shadow: 0 5px 16px color-mix(in srgb, var(--sky-accent) 11%, transparent);
   transform: translateY(-1px);
 }
-
 .dsh-skyline-trigger:focus-visible,
 .dsh-skyline-panel button:focus-visible,
 .dsh-skyline-panel input:focus-visible {
-  outline: 2px solid #8ea7ff;
+  outline: 2px solid var(--sky-accent, #4d6bfe);
   outline-offset: 2px;
 }
-
 .dsh-skyline-trigger-mark {
   width: 16px;
   height: 16px;
-  color: var(--sky-accent);
   flex: 0 0 auto;
+  color: var(--sky-accent);
 }
-
 .dsh-skyline-trigger-label {
-  font-weight: 640;
-  letter-spacing: -.01em;
+  font-weight: 650;
+  letter-spacing: -0.01em;
 }
-
 .dsh-skyline-trigger-count {
   display: inline-flex;
   min-width: 18px;
@@ -57,152 +55,158 @@
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--sky-accent) 17%, transparent);
-  color: color-mix(in srgb, var(--sky-accent) 78%, currentColor);
+  background: color-mix(in srgb, var(--sky-accent) 14%, transparent);
+  color: color-mix(in srgb, var(--sky-accent) 82%, currentColor);
   font-size: 10px;
   font-weight: 750;
 }
-
 .dsh-skyline-live-dot {
   width: 6px;
   height: 6px;
   margin-left: -3px;
   border-radius: 50%;
-  background: #63e4ac;
-  box-shadow: 0 0 0 4px rgba(99, 228, 172, .12), 0 0 12px rgba(99, 228, 172, .65);
+  background: var(--dsw-static-green-500, #27a66c);
+  box-shadow: 0 0 0 4px
+    color-mix(in srgb, var(--dsw-static-green-500, #27a66c) 13%, transparent);
   animation: dsh-skyline-pulse 1.8s ease-in-out infinite;
 }
-
 @keyframes dsh-skyline-pulse {
-  0%, 100% { opacity: .65; transform: scale(.9); }
-  50% { opacity: 1; transform: scale(1.08); }
+  0%,
+  100% {
+    opacity: 0.64;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
 }
-
 .dsh-skyline-backdrop {
-  --sky-bg: #070a12;
-  --sky-panel: #0d1220;
-  --sky-panel-2: #111827;
-  --sky-border: rgba(150, 168, 202, .16);
-  --sky-border-strong: rgba(151, 170, 212, .28);
-  --sky-text: #f5f7ff;
-  --sky-muted: #8e9bb4;
-  --sky-accent: #7c9dff;
-  --sky-accent-2: #9c7cff;
-  --sky-good: #65e6b4;
+  --sky-bg: #f4f7fb;
+  --sky-panel: #fbfcfe;
+  --sky-panel-2: #eef3f9;
+  --sky-overlay: #fff;
+  --sky-border: rgba(61, 77, 101, 0.12);
+  --sky-border-strong: rgba(61, 77, 101, 0.2);
+  --sky-text: var(--dsw-static-neutral-bluish-900, #202836);
+  --sky-muted: var(--dsw-static-neutral-bluish-600, #667286);
+  --sky-faint: var(--dsw-static-neutral-bluish-500, #8490a2);
+  --sky-accent: var(--dsw-static-deepseek-500, #4d6bfe);
+  --sky-accent-hover: var(--dsw-static-deepseek-600, #3f5ce0);
+  --sky-good: var(--dsw-static-green-500, #27a66c);
+  --sky-warn: var(--dsw-static-amber-500, #d89a32);
+  --sky-danger: var(--dsw-static-red-500, #d86062);
   position: fixed;
   inset: 0;
   z-index: 2147483000;
   display: grid;
   place-items: center;
   padding: 22px;
-  background:
-    radial-gradient(circle at 50% 10%, rgba(84, 104, 173, .18), transparent 42%),
-    rgba(3, 5, 11, .76);
-  backdrop-filter: blur(18px) saturate(115%);
-  -webkit-backdrop-filter: blur(18px) saturate(115%);
+  background: rgba(44, 53, 68, 0.26);
+  -webkit-backdrop-filter: blur(8px) saturate(102%);
+  backdrop-filter: blur(8px) saturate(102%);
   color: var(--sky-text);
-  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-  animation: dsh-skyline-backdrop-in .18s ease-out both;
+  font-family: inherit;
+  animation: dsh-skyline-backdrop-in 0.16s ease-out both;
 }
-
 @keyframes dsh-skyline-backdrop-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-
 .dsh-skyline-panel {
   position: relative;
   display: grid;
   grid-template-rows: auto auto minmax(0, 1fr) auto;
-  width: min(1480px, 96vw);
-  height: min(940px, 94vh);
+  width: min(1520px, 96vw);
+  height: min(920px, 94vh);
   min-height: 640px;
   overflow: hidden;
   border: 1px solid var(--sky-border-strong);
-  border-radius: 24px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.025), transparent 14%),
-    var(--sky-bg);
+  border-radius: 16px;
+  background: var(--sky-panel);
   box-shadow:
-    0 48px 140px rgba(0, 0, 0, .62),
-    0 8px 32px rgba(0, 0, 0, .42),
-    inset 0 1px 0 rgba(255,255,255,.05);
-  animation: dsh-skyline-panel-in .3s cubic-bezier(.18,.85,.25,1) both;
+    0 28px 80px rgba(33, 44, 63, 0.2),
+    0 4px 16px rgba(33, 44, 63, 0.08);
+  animation: dsh-skyline-panel-in 0.26s cubic-bezier(0.22, 0.8, 0.24, 1) both;
 }
-
 @keyframes dsh-skyline-panel-in {
-  from { opacity: 0; transform: translateY(14px) scale(.985); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
-
 .dsh-skyline-header {
   display: flex;
+  min-height: 64px;
+  padding: 11px 14px 10px 18px;
   align-items: center;
   justify-content: space-between;
-  min-height: 72px;
-  padding: 14px 18px 13px 20px;
   border-bottom: 1px solid var(--sky-border);
-  background: rgba(10, 14, 24, .8);
+  background: var(--sky-panel);
 }
-
 .dsh-skyline-brand,
 .dsh-skyline-header-right {
   display: flex;
   align-items: center;
 }
-
-.dsh-skyline-brand { gap: 12px; }
-.dsh-skyline-header-right { gap: 12px; }
-
+.dsh-skyline-brand {
+  gap: 11px;
+}
+.dsh-skyline-header-right {
+  gap: 10px;
+}
 .dsh-skyline-brand-mark {
   display: grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
-  border: 1px solid rgba(124, 157, 255, .35);
-  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid color-mix(in srgb, var(--sky-accent) 25%, transparent);
+  border-radius: 10px;
   color: var(--sky-accent);
-  background: linear-gradient(145deg, rgba(124,157,255,.18), rgba(156,124,255,.07));
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 8px 24px rgba(69,89,169,.13);
+  background: color-mix(in srgb, var(--sky-accent) 8%, var(--sky-panel));
 }
-
-.dsh-skyline-brand-mark svg { width: 22px; height: 22px; }
-
+.dsh-skyline-brand-mark svg {
+  width: 21px;
+  height: 21px;
+}
 .dsh-skyline-brand h2 {
   margin: 0;
   color: var(--sky-text);
   font-size: 15px;
-  font-weight: 750;
-  letter-spacing: -.015em;
+  font-weight: 720;
+  letter-spacing: -0.015em;
 }
-
 .dsh-skyline-brand p {
-  margin: 4px 0 0;
+  margin: 3px 0 0;
   color: var(--sky-muted);
   font-size: 11px;
-  font-weight: 560;
+  font-weight: 540;
 }
-
 .dsh-skyline-privacy {
   display: inline-flex;
+  padding: 6px 9px;
   align-items: center;
   gap: 7px;
-  padding: 7px 10px;
-  border: 1px solid rgba(101, 230, 180, .2);
+  border: 1px solid color-mix(in srgb, var(--sky-good) 22%, transparent);
   border-radius: 999px;
-  background: rgba(101, 230, 180, .06);
-  color: #a9f0d2;
+  background: color-mix(in srgb, var(--sky-good) 7%, var(--sky-panel));
+  color: color-mix(in srgb, var(--sky-good) 78%, var(--sky-text));
   font-size: 10.5px;
   font-weight: 650;
   white-space: nowrap;
 }
-
 .dsh-skyline-privacy > span {
   color: var(--sky-good);
   font-size: 7px;
-  filter: drop-shadow(0 0 5px rgba(101,230,180,.65));
 }
-
 .dsh-skyline-icon-button {
   display: grid;
   place-items: center;
@@ -210,156 +214,164 @@
   height: 34px;
   padding: 0;
   border: 1px solid var(--sky-border);
-  border-radius: 10px;
-  background: rgba(255,255,255,.025);
+  border-radius: 8px;
+  background: transparent;
   color: var(--sky-muted);
   cursor: pointer;
-  transition: .18s ease;
+  transition:
+    border-color 0.16s ease,
+    background-color 0.16s ease,
+    color 0.16s ease;
 }
-
 .dsh-skyline-icon-button:hover {
   border-color: var(--sky-border-strong);
-  background: rgba(255,255,255,.06);
+  background: var(--sky-panel-2);
   color: var(--sky-text);
 }
-
-.dsh-skyline-icon-button svg { width: 17px; height: 17px; }
-
+.dsh-skyline-icon-button svg {
+  width: 17px;
+  height: 17px;
+}
 .dsh-skyline-tabs {
   display: flex;
-  gap: 3px;
-  min-height: 47px;
-  padding: 8px 18px;
+  min-height: 44px;
+  padding: 5px 14px;
   align-items: center;
+  gap: 2px;
   border-bottom: 1px solid var(--sky-border);
-  background: rgba(9, 13, 22, .76);
+  background: var(--sky-panel);
 }
-
 .dsh-skyline-tab {
   position: relative;
-  padding: 8px 13px;
+  min-height: 32px;
+  padding: 7px 12px;
   border: 0;
-  border-radius: 8px;
+  border-radius: 7px;
   background: transparent;
   color: var(--sky-muted);
   font: inherit;
   font-size: 11px;
-  font-weight: 640;
+  font-weight: 620;
   cursor: pointer;
-  transition: .18s ease;
+  transition:
+    background-color 0.16s ease,
+    color 0.16s ease;
 }
-
-.dsh-skyline-tab:hover { color: var(--sky-text); background: rgba(255,255,255,.035); }
-.dsh-skyline-tab[data-active="true"] { color: var(--sky-text); background: rgba(124,157,255,.11); }
+.dsh-skyline-tab:hover {
+  color: var(--sky-text);
+  background: var(--sky-panel-2);
+}
+.dsh-skyline-tab[data-active="true"] {
+  color: var(--sky-accent);
+  background: color-mix(in srgb, var(--sky-accent) 8%, var(--sky-panel));
+}
 .dsh-skyline-tab[data-active="true"]::after {
   content: "";
   position: absolute;
   left: 12px;
   right: 12px;
-  bottom: -9px;
+  bottom: -6px;
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--sky-accent), var(--sky-accent-2));
-  box-shadow: 0 0 12px rgba(124,157,255,.6);
+  background: var(--sky-accent);
 }
-
 .dsh-skyline-body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
+  grid-template-columns: minmax(0, 1fr) 286px;
   min-height: 0;
   overflow: hidden;
+  background: var(--sky-bg);
 }
-
 .dsh-skyline-stage-column {
   display: grid;
   grid-template-rows: minmax(0, 1fr) auto auto;
-  gap: 12px;
   min-width: 0;
   min-height: 0;
-  padding: 16px;
+  padding: 16px 18px 14px;
   overflow: auto;
-  background:
-    radial-gradient(circle at 70% 18%, rgba(94, 117, 198, .08), transparent 35%),
-    #080c15;
+  background: var(--sky-bg);
 }
-
 .dsh-skyline-stage {
   position: relative;
-  min-height: 340px;
+  min-height: 360px;
   overflow: hidden;
   border: 1px solid var(--sky-border);
-  border-radius: 18px;
-  background: #070a12;
-  box-shadow: 0 18px 50px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.025);
+  border-radius: 12px;
+  background: #eef3f9;
+  box-shadow: 0 12px 32px rgba(65, 83, 111, 0.09);
 }
-
 .dsh-skyline-stage::after {
   content: "";
   pointer-events: none;
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
 }
-
 .dsh-skyline-stage-art {
   width: 100%;
   height: 100%;
+  aspect-ratio: 16/9;
 }
-
 .dsh-skyline-stage-art svg {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 340px;
+  min-height: 360px;
   object-fit: contain;
 }
-
 .dsh-skyline-empty {
   pointer-events: none;
   position: absolute;
-  margin: 0;
   inset: 50% auto auto 50%;
-  width: min(320px, 72%);
-  transform: translate(-50%, -50%);
+  width: min(340px, 76%);
+  margin: 0;
   color: var(--sky-muted);
   font-size: 12px;
   line-height: 1.65;
   text-align: center;
+  transform: translate(-50%, -50%);
 }
-
 .dsh-skyline-player {
   display: grid;
   grid-template-columns: auto minmax(180px, 1fr) auto;
+  min-height: 50px;
+  padding: 11px 2px 8px;
   align-items: center;
   gap: 14px;
-  min-height: 50px;
-  padding: 9px 12px;
-  border: 1px solid var(--sky-border);
-  border-radius: 13px;
-  background: rgba(15, 21, 35, .72);
+  border-bottom: 1px solid var(--sky-border);
+  background: transparent;
 }
-
 .dsh-skyline-play {
   display: inline-flex;
-  align-items: center;
-  gap: 7px;
   min-height: 32px;
   padding: 7px 11px;
-  border: 1px solid rgba(124,157,255,.28);
-  border-radius: 9px;
-  background: rgba(124,157,255,.1);
-  color: #dce4ff;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid color-mix(in srgb, var(--sky-accent) 24%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--sky-accent) 7%, transparent);
+  color: var(--sky-accent);
   font: inherit;
   font-size: 10.5px;
   font-weight: 680;
   cursor: pointer;
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease;
 }
-
-.dsh-skyline-play:hover:not(:disabled) { background: rgba(124,157,255,.16); border-color: rgba(124,157,255,.5); }
-.dsh-skyline-play:disabled { opacity: .42; cursor: not-allowed; }
-.dsh-skyline-play svg { width: 16px; height: 16px; }
-
+.dsh-skyline-play:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--sky-accent) 12%, transparent);
+  border-color: color-mix(in srgb, var(--sky-accent) 42%, transparent);
+}
+.dsh-skyline-play:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+.dsh-skyline-play svg {
+  width: 16px;
+  height: 16px;
+}
 .dsh-skyline-scrubber {
   display: grid;
   grid-template-columns: auto minmax(100px, 1fr);
@@ -369,13 +381,11 @@
   font-size: 10px;
   font-weight: 620;
 }
-
 .dsh-skyline-scrubber input {
   width: 100%;
   accent-color: var(--sky-accent);
   cursor: pointer;
 }
-
 .dsh-skyline-progress {
   min-width: 50px;
   color: var(--sky-muted);
@@ -384,138 +394,210 @@
   font-weight: 660;
   text-align: right;
 }
-
 .dsh-skyline-metrics-row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
+  min-height: 58px;
+  padding-top: 8px;
 }
-
 .dsh-skyline-metric {
   min-width: 0;
-  padding: 10px 12px;
-  border: 1px solid var(--sky-border);
-  border-radius: 12px;
-  background: rgba(15, 21, 35, .62);
+  padding: 7px 12px 4px;
 }
-
+.dsh-skyline-metric + .dsh-skyline-metric {
+  border-left: 1px solid var(--sky-border);
+}
 .dsh-skyline-metric-value,
-.dsh-skyline-metric-label { display: block; }
-.dsh-skyline-metric-value { color: var(--sky-text); font-size: 18px; font-weight: 750; letter-spacing: -.025em; }
-.dsh-skyline-metric-label { margin-top: 3px; overflow: hidden; color: var(--sky-muted); font-size: 9.5px; font-weight: 620; text-overflow: ellipsis; white-space: nowrap; }
-
+.dsh-skyline-metric-label {
+  display: block;
+}
+.dsh-skyline-metric-value {
+  color: var(--sky-text);
+  font-size: 18px;
+  font-weight: 730;
+  letter-spacing: -0.025em;
+}
+.dsh-skyline-metric-label {
+  margin-top: 3px;
+  overflow: hidden;
+  color: var(--sky-muted);
+  font-size: 9.5px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .dsh-skyline-controls {
   min-height: 0;
-  padding: 16px;
+  padding: 18px 16px;
   overflow: auto;
   border-left: 1px solid var(--sky-border);
-  background:
-    linear-gradient(180deg, rgba(124,157,255,.035), transparent 160px),
-    #0b101b;
+  background: var(--sky-panel);
 }
-
-.dsh-skyline-control-section + .dsh-skyline-control-section { margin-top: 17px; }
+.dsh-skyline-control-section + .dsh-skyline-control-section {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--sky-border);
+}
 .dsh-skyline-section-kicker,
 .dsh-skyline-field-label {
   display: block;
   margin-bottom: 8px;
   color: var(--sky-muted);
   font-size: 9px;
-  font-weight: 760;
-  letter-spacing: .12em;
+  font-weight: 730;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-
 .dsh-skyline-identity-card {
   display: grid;
   gap: 4px;
-  padding: 13px;
-  border: 1px solid rgba(124,157,255,.2);
-  border-radius: 13px;
-  background:
-    radial-gradient(circle at 90% 10%, rgba(156,124,255,.12), transparent 42%),
-    rgba(124,157,255,.055);
+  padding: 0 1px 2px;
+  background: transparent;
 }
-
 .dsh-skyline-city-code {
   color: var(--sky-accent);
   font-size: 9px;
   font-weight: 760;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
 }
-
-.dsh-skyline-identity-card strong { color: var(--sky-text); font-size: 14px; font-weight: 720; }
-.dsh-skyline-identity-card > span:last-child { color: var(--sky-muted); font-size: 10px; line-height: 1.45; }
-
+.dsh-skyline-identity-card strong {
+  color: var(--sky-text);
+  font-size: 15px;
+  font-weight: 710;
+}
+.dsh-skyline-identity-card > span:last-child {
+  color: var(--sky-muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
 .dsh-skyline-input {
   box-sizing: border-box;
   width: 100%;
   height: 36px;
-  padding: 0 11px;
-  border: 1px solid var(--sky-border);
-  border-radius: 10px;
-  background: rgba(255,255,255,.035);
+  padding: 0 10px;
+  border: 1px solid var(--sky-border-strong);
+  border-radius: 8px;
+  background: var(--sky-panel);
   color: var(--sky-text);
   font: inherit;
   font-size: 11px;
-  transition: .18s ease;
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease;
 }
-
-.dsh-skyline-input:hover { border-color: var(--sky-border-strong); }
-.dsh-skyline-input::placeholder { color: #647086; }
-.dsh-skyline-field-hint { margin: 7px 1px 0; color: #68768f; font-size: 9px; line-height: 1.5; }
-
-.dsh-skyline-theme-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+.dsh-skyline-input:hover {
+  border-color: color-mix(
+    in srgb,
+    var(--sky-accent) 34%,
+    var(--sky-border-strong)
+  );
+}
+.dsh-skyline-input::placeholder {
+  color: var(--sky-faint);
+}
+.dsh-skyline-field-hint {
+  margin: 7px 1px 0;
+  color: var(--sky-faint);
+  font-size: 9px;
+  line-height: 1.5;
+}
+.dsh-skyline-theme-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
 .dsh-skyline-theme {
   position: relative;
   display: flex;
-  height: 35px;
+  height: 36px;
   padding: 5px;
   gap: 2px;
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
   border: 1px solid var(--sky-border);
-  border-radius: 9px;
-  background: #080c15;
+  border-radius: 8px;
+  background: var(--sky-panel-2);
   cursor: pointer;
-  transition: .18s ease;
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.16s ease;
 }
-
-.dsh-skyline-theme:hover { transform: translateY(-1px); border-color: var(--sky-border-strong); }
-.dsh-skyline-theme[data-active="true"] { border-color: var(--sky-accent); box-shadow: 0 0 0 2px rgba(124,157,255,.12); }
-.dsh-skyline-theme span { display: block; width: 5px; border-radius: 1.5px 1.5px 0 0; }
-.dsh-skyline-theme span:nth-child(1) { height: 12px; }
-.dsh-skyline-theme span:nth-child(2) { height: 20px; }
-.dsh-skyline-theme span:nth-child(3) { height: 16px; }
-.dsh-skyline-theme[data-theme="midnight"] { background: linear-gradient(#10172a,#070a12); }
-.dsh-skyline-theme[data-theme="midnight"] span { background: #7c9dff; }
-.dsh-skyline-theme[data-theme="aurora"] { background: linear-gradient(#12233a,#071713); }
-.dsh-skyline-theme[data-theme="aurora"] span { background: #5de4b7; }
-.dsh-skyline-theme[data-theme="sunset"] { background: linear-gradient(#3b1836,#160a16); }
-.dsh-skyline-theme[data-theme="sunset"] span { background: #ff8f70; }
-.dsh-skyline-theme[data-theme="paper"] { background: linear-gradient(#eee9df,#d6d0c4); }
-.dsh-skyline-theme[data-theme="paper"] span { background: #315beb; }
-
-.dsh-skyline-landmarks { display: flex; flex-wrap: wrap; gap: 5px; }
+.dsh-skyline-theme:hover {
+  border-color: var(--sky-border-strong);
+  transform: translateY(-1px);
+}
+.dsh-skyline-theme[data-active="true"] {
+  border-color: var(--sky-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--sky-accent) 12%, transparent);
+}
+.dsh-skyline-theme span {
+  display: block;
+  width: 5px;
+  border-radius: 1px 1px 0 0;
+}
+.dsh-skyline-theme span:nth-child(1) {
+  height: 12px;
+}
+.dsh-skyline-theme span:nth-child(2) {
+  height: 20px;
+}
+.dsh-skyline-theme span:nth-child(3) {
+  height: 16px;
+}
+.dsh-skyline-theme[data-theme="midnight"] {
+  background: linear-gradient(180deg, #f4f7ff, #dce7fb);
+}
+.dsh-skyline-theme[data-theme="midnight"] span {
+  background: #4d6bfe;
+}
+.dsh-skyline-theme[data-theme="aurora"] {
+  background: linear-gradient(180deg, #f3fbf7, #dcefe6);
+}
+.dsh-skyline-theme[data-theme="aurora"] span {
+  background: #27a66c;
+}
+.dsh-skyline-theme[data-theme="sunset"] {
+  background: linear-gradient(180deg, #fff8f4, #f3dfd5);
+}
+.dsh-skyline-theme[data-theme="sunset"] span {
+  background: #d86d4d;
+}
+.dsh-skyline-theme[data-theme="paper"] {
+  background: linear-gradient(180deg, #fbfaf7, #ece8df);
+}
+.dsh-skyline-theme[data-theme="paper"] span {
+  background: #315beb;
+}
+.dsh-skyline-landmarks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
 .dsh-skyline-landmarks > span {
   padding: 5px 7px;
-  border: 1px solid rgba(255,184,107,.17);
-  border-radius: 7px;
-  background: rgba(255,184,107,.055);
-  color: #e6c49d;
+  border: 1px solid color-mix(in srgb, var(--sky-warn) 20%, transparent);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--sky-warn) 7%, transparent);
+  color: color-mix(in srgb, var(--sky-warn) 72%, var(--sky-text));
   font-size: 8.5px;
-  font-weight: 620;
+  font-weight: 630;
 }
-.dsh-skyline-landmarks > .dsh-skyline-landmark-locked { color: #657086; border-color: var(--sky-border); background: transparent; letter-spacing: .3em; }
-
+.dsh-skyline-landmarks > .dsh-skyline-landmark-locked {
+  color: var(--sky-faint);
+  border-color: var(--sky-border);
+  background: transparent;
+  letter-spacing: 0.3em;
+}
 .dsh-skyline-export-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 7px;
   margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--sky-border);
 }
-
 .dsh-skyline-primary-button,
 .dsh-skyline-secondary-button {
   display: inline-flex;
@@ -524,112 +606,220 @@
   align-items: center;
   justify-content: center;
   gap: 7px;
-  border-radius: 10px;
-  color: var(--sky-text);
+  border-radius: 8px;
   font: inherit;
   font-size: 10px;
   font-weight: 680;
   cursor: pointer;
-  transition: .18s ease;
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.16s ease;
 }
-
 .dsh-skyline-primary-button {
-  border: 1px solid rgba(124,157,255,.6);
-  background: linear-gradient(135deg, #607fdf, #765bd2);
-  box-shadow: 0 10px 24px rgba(75, 93, 185, .22);
+  border: 1px solid var(--sky-accent);
+  background: var(--sky-accent);
+  color: #fff;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--sky-accent) 18%, transparent);
 }
-.dsh-skyline-primary-button:hover { filter: brightness(1.08); transform: translateY(-1px); }
-.dsh-skyline-secondary-button { border: 1px solid var(--sky-border); background: rgba(255,255,255,.035); }
-.dsh-skyline-secondary-button:hover { border-color: var(--sky-border-strong); background: rgba(255,255,255,.06); }
+.dsh-skyline-primary-button:hover {
+  background: var(--sky-accent-hover);
+  border-color: var(--sky-accent-hover);
+  transform: translateY(-1px);
+}
+.dsh-skyline-secondary-button {
+  border: 1px solid var(--sky-border-strong);
+  background: var(--sky-panel);
+  color: var(--sky-text);
+}
+.dsh-skyline-secondary-button:hover {
+  border-color: color-mix(
+    in srgb,
+    var(--sky-accent) 28%,
+    var(--sky-border-strong)
+  );
+  background: var(--sky-panel-2);
+}
 .dsh-skyline-primary-button svg,
-.dsh-skyline-secondary-button svg { width: 15px; height: 15px; }
-.dsh-skyline-copy-button { grid-column: 1 / -1; }
-
+.dsh-skyline-secondary-button svg {
+  width: 15px;
+  height: 15px;
+}
+.dsh-skyline-copy-button {
+  grid-column: 1/-1;
+}
 .dsh-skyline-reset {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 9px;
   padding: 7px 8px;
   border: 0;
   background: transparent;
-  color: #67738b;
+  color: var(--sky-faint);
   font: inherit;
   font-size: 9px;
   cursor: pointer;
 }
-.dsh-skyline-reset:hover:not(:disabled) { color: #b8c2d6; }
-.dsh-skyline-reset:disabled { opacity: .36; cursor: default; }
-
+.dsh-skyline-reset:hover:not(:disabled) {
+  color: var(--sky-danger);
+}
+.dsh-skyline-reset:disabled {
+  opacity: 0.36;
+  cursor: default;
+}
 .dsh-skyline-footer {
   display: flex;
-  min-height: 44px;
-  padding: 10px 18px;
+  min-height: 40px;
+  padding: 9px 18px;
   align-items: center;
   gap: 9px;
   border-top: 1px solid var(--sky-border);
-  background: #090d16;
-  color: #69768f;
+  background: var(--sky-panel);
+  color: var(--sky-muted);
   font-size: 9.5px;
   line-height: 1.45;
 }
-.dsh-skyline-footer-shield { color: #65e6b4; font-size: 9px; }
-
+.dsh-skyline-footer-shield {
+  color: var(--sky-good);
+  font-size: 9px;
+}
 .dsh-skyline-toast {
   position: absolute;
   left: 50%;
-  bottom: 56px;
+  bottom: 52px;
   z-index: 3;
   padding: 9px 13px;
-  border: 1px solid rgba(124,157,255,.3);
-  border-radius: 10px;
-  background: rgba(18, 25, 42, .95);
+  border: 1px solid var(--sky-border-strong);
+  border-radius: 8px;
+  background: var(--sky-overlay);
   color: var(--sky-text);
-  box-shadow: 0 14px 44px rgba(0,0,0,.38);
+  box-shadow: 0 12px 34px rgba(39, 51, 70, 0.16);
   font-size: 10px;
   font-weight: 650;
   transform: translateX(-50%);
-  animation: dsh-skyline-toast-in .22s ease both;
+  animation: dsh-skyline-toast-in 0.2s ease both;
 }
-@keyframes dsh-skyline-toast-in { from { opacity: 0; transform: translate(-50%, 6px); } to { opacity: 1; transform: translate(-50%, 0); } }
-
+@keyframes dsh-skyline-toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
 @keyframes sky-rise {
-  from { opacity: 0; transform: translateY(18px) scale(.96); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 .dsh-skyline-stage-art [data-reveal="true"] {
   transform-box: fill-box;
   transform-origin: center bottom;
-  animation: sky-rise .42s cubic-bezier(.2,.8,.2,1) both;
+  animation: sky-rise 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
-
 @media (max-width: 1080px) {
-  .dsh-skyline-panel { height: min(960px, 96vh); }
-  .dsh-skyline-body { grid-template-columns: minmax(0, 1fr) 270px; }
-  .dsh-skyline-stage-column { padding: 12px; }
-  .dsh-skyline-controls { padding: 13px; }
-  .dsh-skyline-metrics-row { grid-template-columns: repeat(2, 1fr); }
+  .dsh-skyline-panel {
+    height: min(960px, 96vh);
+  }
+  .dsh-skyline-body {
+    grid-template-columns: minmax(0, 1fr) 260px;
+  }
+  .dsh-skyline-stage-column {
+    padding: 12px 14px;
+  }
+  .dsh-skyline-controls {
+    padding: 15px 13px;
+  }
+  .dsh-skyline-metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dsh-skyline-metric:nth-child(3) {
+    border-left: 0;
+  }
+  .dsh-skyline-metric:nth-child(n + 3) {
+    border-top: 1px solid var(--sky-border);
+  }
 }
-
 @media (max-width: 760px) {
-  .dsh-skyline-backdrop { padding: 0; }
-  .dsh-skyline-panel { width: 100vw; height: 100dvh; min-height: 0; border: 0; border-radius: 0; }
-  .dsh-skyline-header { min-height: 62px; padding: 10px 12px; }
-  .dsh-skyline-brand-mark { width: 34px; height: 34px; }
-  .dsh-skyline-brand p { display: none; }
-  .dsh-skyline-privacy { display: none; }
-  .dsh-skyline-tabs { overflow-x: auto; padding-inline: 10px; }
-  .dsh-skyline-tab { white-space: nowrap; }
-  .dsh-skyline-body { display: block; overflow: auto; }
-  .dsh-skyline-stage-column { min-height: auto; overflow: visible; }
-  .dsh-skyline-stage { min-height: 240px; border-radius: 13px; }
-  .dsh-skyline-stage-art svg { min-height: 240px; }
-  .dsh-skyline-player { grid-template-columns: auto 1fr; }
-  .dsh-skyline-scrubber { grid-template-columns: 1fr; gap: 4px; }
-  .dsh-skyline-progress { display: none; }
-  .dsh-skyline-controls { overflow: visible; border-top: 1px solid var(--sky-border); border-left: 0; }
-  .dsh-skyline-footer { position: sticky; bottom: 0; z-index: 2; }
-  .dsh-skyline-trigger-label { display: none; }
+  .dsh-skyline-backdrop {
+    padding: 0;
+  }
+  .dsh-skyline-panel {
+    width: 100vw;
+    height: 100dvh;
+    min-height: 0;
+    border: 0;
+    border-radius: 0;
+  }
+  .dsh-skyline-header {
+    min-height: 60px;
+    padding: 10px 12px;
+  }
+  .dsh-skyline-brand-mark {
+    width: 34px;
+    height: 34px;
+  }
+  .dsh-skyline-brand p,
+  .dsh-skyline-privacy {
+    display: none;
+  }
+  .dsh-skyline-tabs {
+    overflow-x: auto;
+    padding-inline: 9px;
+  }
+  .dsh-skyline-tab {
+    white-space: nowrap;
+  }
+  .dsh-skyline-body {
+    display: block;
+    overflow: auto;
+  }
+  .dsh-skyline-stage-column {
+    min-height: auto;
+    padding: 10px;
+    overflow: visible;
+  }
+  .dsh-skyline-stage {
+    min-height: 250px;
+    border-radius: 10px;
+  }
+  .dsh-skyline-stage-art {
+    aspect-ratio: 4/3;
+  }
+  .dsh-skyline-stage-art svg {
+    min-height: 250px;
+  }
+  .dsh-skyline-player {
+    grid-template-columns: auto 1fr;
+  }
+  .dsh-skyline-scrubber {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .dsh-skyline-progress {
+    display: none;
+  }
+  .dsh-skyline-controls {
+    overflow: visible;
+    border-top: 1px solid var(--sky-border);
+    border-left: 0;
+  }
+  .dsh-skyline-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    background: var(--sky-panel);
+  }
+  .dsh-skyline-trigger-label {
+    display: none;
+  }
 }
-
 @media (prefers-reduced-motion: reduce) {
   .dsh-skyline-backdrop,
   .dsh-skyline-panel,
