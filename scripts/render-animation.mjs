@@ -15,7 +15,8 @@ await rm(output, { recursive: true, force: true })
 await mkdir(output, { recursive: true })
 for (const [index, visibleCount] of stops.entries()) {
   const svg = renderSkylineSvg(model, {
-    theme: 'midnight',
+    theme: 'paper',
+    layout: 'scene',
     projectLabel: 'NORTHSTAR / LOCAL',
     rangeLabel: 'CONSTRUCTION REPLAY',
     visibleCount,

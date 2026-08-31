@@ -1,20 +1,20 @@
-# v1.1.0 — Local ecosystem, portable cities, vertical sharing
+# v1.1.0 — A daylight civic workspace for Agent sessions
 
-Agent Skyline v1.1 turns the city into a portable, privacy-safe creative asset while keeping every integration local.
+Agent Skyline v1.1 rebuilds the session city as a DSH-native daylight workspace. The procedural city remains deterministic and privacy-safe, while the interface, architecture, exports, accessibility, and release evidence now ship as one coherent product.
 
-## New
+## Highlights
 
-- 9:16 PNG/SVG share cards designed for Xiaohongshu, Douyin, and mobile feeds
-- Checksum-protected anonymous city seed export/import
-- README and GitHub Profile SVG badge export
-- Seasonal landmarks plus deterministic rare landmarks
-- Aggregate-only local bridge for `dsh-task-dag` and `dsh-token-usage`
-- Read-only browser API at `window.AgentSkylineV11`
-- Desktop and mobile v1.1 preview assets
+- Four daylight climates: Blueprint, Garden, Terracotta, and Paper, with persisted theme IDs preserved for compatibility
+- A city-first scene with civic roads, a central plaza, parks, low-rise buffers, richer architectural families, tiered setbacks, facades, podiums, and roof details
+- Separate in-app scene and self-contained export-card SVG layouts
+- Accessible modal focus containment, app-owned local-history confirmation, reduced-motion handling, and durable manual-copy recovery
+- Truthful PNG-to-SVG fallback and stale-safe copy/export feedback
+- Regenerated desktop, mobile, export, theme, construction, social, and architecture assets with recorded provenance
+- 27 automated tests, deterministic double-render checks, package/asset manifest validation, and guarded immutable-tag release automation
 
 ## Privacy
 
-The ecosystem bridge accepts bounded numeric aggregates only. Prompts, replies, commands, tool arguments, paths, task text, messages, credentials, repository names, and user identifiers are never copied into the city, seed, badge, or share card.
+The reducer still discards prompts, replies, commands, tool arguments, paths, workspace names, credentials, and raw model output before city generation. Only coarse category, outcome, duration, and timestamp signals can reach browser-local history or exports.
 
 ## Install
 
@@ -22,4 +22,4 @@ The ecosystem bridge accepts bounded numeric aggregates only. Prompts, replies, 
 dsh plugin --profile web add "github:LeemanCheung/dsh-agent-skyline#v1.1.0"
 ```
 
-The existing v1.0 city model, four visual climates, replay, local history, PNG/SVG export, and privacy reducer remain intact.
+The install is pinned to the immutable `v1.1.0` tag. The release workflow refuses a tag that differs from `package.json`, points at another commit, or already has a GitHub Release.

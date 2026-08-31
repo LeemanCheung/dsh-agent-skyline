@@ -28,43 +28,51 @@ window.AgentSkylineCore = (() => {
 
     const THEMES = {
       midnight: {
-        id: 'midnight', name: 'Midnight',
-        background: '#070A12', background2: '#10172A', ground: '#111B2D', grid: '#20304A',
-        text: '#F4F7FF', muted: '#8D9BB4', accent: '#7C9DFF', accent2: '#9B7CFF', glow: '#6F8CFF',
-        success: '#65E6B4', danger: '#FF6F91', panel: '#0C1220',
+        id: 'midnight', name: 'Blueprint',
+        background: '#F3F7FB', background2: '#E7EFF6', ground: '#E8EDF1', grid: '#B9C8D3',
+        text: '#21384A', muted: '#647989', accent: '#2D6FA4', accent2: '#6A98B8', glow: '#B8D3E7',
+        success: '#37785C', danger: '#B65B55', panel: '#FBFDFE', road: '#A9B7C1', roadLine: '#F4F7F8',
+        planting: '#6F966F', water: '#86B9D0', shadow: '#7D91A0',
+        material: { porcelain: '#F4F3EE', limestone: '#DDD7C9', glass: '#8EB9D0', stone: '#BCC5C8' },
         category: {
-          file: '#78A6FF', shell: '#A889FF', test: '#59DFB0', web: '#57C7FF', agent: '#FFB86B',
-          vision: '#FF7CD8', reasoning: '#B8C4DF', conversation: '#89F0E1', other: '#78869F',
+          file: '#3F78A8', shell: '#687DA0', test: '#4F8066', web: '#3E8297', agent: '#B4783C',
+          vision: '#8B6685', reasoning: '#647584', conversation: '#527E77', other: '#7A858C',
         },
       },
       aurora: {
-        id: 'aurora', name: 'Aurora',
-        background: '#071713', background2: '#12233A', ground: '#102723', grid: '#24423C',
-        text: '#F1FFF9', muted: '#8EB6AA', accent: '#5DE4B7', accent2: '#68A9FF', glow: '#53D9B0',
-        success: '#80F0BE', danger: '#FF7890', panel: '#0A1D19',
+        id: 'aurora', name: 'Garden',
+        background: '#F4F8F2', background2: '#E8F1E7', ground: '#E9EFE5', grid: '#C0CDBA',
+        text: '#293B30', muted: '#687A6B', accent: '#3E785B', accent2: '#7A9666', glow: '#C7DDC6',
+        success: '#347557', danger: '#B65D55', panel: '#FCFDF9', road: '#ADB8AA', roadLine: '#F5F7F1',
+        planting: '#6E9562', water: '#8BBBC1', shadow: '#849286',
+        material: { porcelain: '#F5F3EA', limestone: '#DED8C8', glass: '#94BEC5', stone: '#BEC7BD' },
         category: {
-          file: '#6AB4FF', shell: '#A68BFF', test: '#63E7AE', web: '#5DE0E6', agent: '#FFC66D',
-          vision: '#FF80CC', reasoning: '#B6D8D0', conversation: '#86F5D7', other: '#789A91',
+          file: '#527FA3', shell: '#727B9A', test: '#4E7F5D', web: '#4D8390', agent: '#A97943',
+          vision: '#8D6F84', reasoning: '#687B73', conversation: '#5B8171', other: '#7D887B',
         },
       },
       sunset: {
-        id: 'sunset', name: 'Sunset',
-        background: '#160A16', background2: '#3B1836', ground: '#261529', grid: '#51304D',
-        text: '#FFF7F2', muted: '#C5A0AF', accent: '#FF8F70', accent2: '#D77BFF', glow: '#FF846A',
-        success: '#8FE2B0', danger: '#FF6685', panel: '#211020',
+        id: 'sunset', name: 'Terracotta',
+        background: '#FBF3ED', background2: '#F1E3D8', ground: '#EFE5DC', grid: '#D5BFAF',
+        text: '#443229', muted: '#7E6B60', accent: '#B65F3E', accent2: '#C98A5E', glow: '#E7C2AD',
+        success: '#4C7958', danger: '#A94D45', panel: '#FFFDF9', road: '#BDAFA5', roadLine: '#FAF5F0',
+        planting: '#789061', water: '#89B3C0', shadow: '#9B887E',
+        material: { porcelain: '#F5F0E7', limestone: '#DFD1BF', glass: '#91B4BF', stone: '#C7BDB5' },
         category: {
-          file: '#FF9A76', shell: '#C98DFF', test: '#83D9A9', web: '#6EC9FF', agent: '#FFD073',
-          vision: '#FF80BF', reasoning: '#D6B7C8', conversation: '#A4E8D8', other: '#A38696',
+          file: '#5C7FA0', shell: '#7E7090', test: '#5F7F5F', web: '#54828D', agent: '#B26A3E',
+          vision: '#9B6478', reasoning: '#7D716E', conversation: '#647F71', other: '#887A73',
         },
       },
       paper: {
         id: 'paper', name: 'Paper',
-        background: '#EEE9DF', background2: '#DCD6C9', ground: '#D7D0C3', grid: '#BEB5A7',
-        text: '#171A1F', muted: '#64666A', accent: '#315BEB', accent2: '#6E49B8', glow: '#315BEB',
-        success: '#167C5A', danger: '#C3415D', panel: '#F7F3EA',
+        background: '#F8F6F1', background2: '#EEEAE1', ground: '#ECE8DE', grid: '#CDC6B8',
+        text: '#29333B', muted: '#6C716F', accent: '#315F91', accent2: '#718E9D', glow: '#D4E0E7',
+        success: '#39765B', danger: '#B25550', panel: '#FFFDF8', road: '#B8B7B0', roadLine: '#F9F7F1',
+        planting: '#76936A', water: '#8DB8C7', shadow: '#90989A',
+        material: { porcelain: '#F5F2E9', limestone: '#DED6C6', glass: '#91B7C7', stone: '#C3C5C1' },
         category: {
-          file: '#356CE2', shell: '#7955B7', test: '#248066', web: '#2589A3', agent: '#B46A1F',
-          vision: '#B54886', reasoning: '#68717C', conversation: '#257E75', other: '#747474',
+          file: '#416F9B', shell: '#716F91', test: '#4C7A5E', web: '#4B7F8E', agent: '#A87542',
+          vision: '#8A687E', reasoning: '#6B747A', conversation: '#587D72', other: '#7B7E7D',
         },
       },
     }
@@ -143,6 +151,72 @@ window.AgentSkylineCore = (() => {
         .replaceAll('>', '&gt;')
         .replaceAll('"', '&quot;')
         .replaceAll("'", '&apos;')
+    }
+
+    const FOCUSABLE_SELECTOR =
+      'button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [href], [tabindex]:not([tabindex="-1"])'
+
+    /** Return visible focus targets owned by a modal root. */
+    function getFocusableElements(root) {
+      if (!root || typeof root.querySelectorAll !== 'function') return []
+      return Array.from(root.querySelectorAll(FOCUSABLE_SELECTOR)).filter(
+        element => typeof element?.getClientRects === 'function' && element.getClientRects().length > 0,
+      )
+    }
+
+    /** Resolve the target needed to keep Tab/Shift+Tab inside a modal root. */
+    function getFocusTrapTarget(root, activeElement, shiftKey = false) {
+      const focusable = getFocusableElements(root)
+      if (!focusable.length) return root || null
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (activeElement === root || !root?.contains?.(activeElement)) {
+        return shiftKey ? last : first
+      }
+      if (shiftKey && activeElement === first) return last
+      if (!shiftKey && activeElement === last) return first
+      return null
+    }
+
+    /** Copy text without leaking a temporary textarea or losing keyboard focus. */
+    async function copyTextWithFallback(text, dependencies = {}) {
+      const navigatorRef = dependencies.navigatorRef ?? globalThis.navigator
+      const documentRef = dependencies.documentRef ?? globalThis.document
+      const writeText = navigatorRef?.clipboard?.writeText
+      if (typeof writeText === 'function') {
+        try {
+          await writeText.call(navigatorRef.clipboard, String(text))
+          return true
+        } catch {
+          // Continue to the local legacy fallback.
+        }
+      }
+      if (!documentRef?.body || typeof documentRef.createElement !== 'function') return false
+      const previousFocus = documentRef.activeElement
+      let area = null
+      let restoreFocus = false
+      try {
+        area = documentRef.createElement('textarea')
+        area.value = String(text)
+        area.setAttribute('aria-hidden', 'true')
+        area.setAttribute('readonly', '')
+        area.style.cssText = 'position:fixed;opacity:0;pointer-events:none'
+        documentRef.body.appendChild(area)
+        area.select()
+        restoreFocus = documentRef.activeElement === area
+        return Boolean(documentRef.execCommand?.('copy'))
+      } catch {
+        return false
+      } finally {
+        area?.remove()
+        if (restoreFocus && typeof previousFocus?.focus === 'function') {
+          try {
+            previousFocus.focus({ preventScroll: true })
+          } catch {
+            previousFocus.focus()
+          }
+        }
+      }
     }
 
     function toHex(value) {
@@ -464,6 +538,16 @@ window.AgentSkylineCore = (() => {
       return cells
     }
 
+    const RESERVED_PARK_CELLS = new Set(['-4,-2', '4,2', '-2,4', '3,-3'])
+
+    function urbanCells(limit) {
+      return spiralCells(Math.max(64, limit * 3))
+        .filter(cell => Math.max(Math.abs(cell.x), Math.abs(cell.y)) > 2)
+        .filter(cell => cell.x !== 0 && cell.y !== 0)
+        .filter(cell => !RESERVED_PARK_CELLS.has(`${cell.x},${cell.y}`))
+        .slice(0, limit)
+    }
+
     function allocateBuildingCounts(metrics, limit) {
       const weighted = CATEGORY_ORDER
         .map(category => ({ category, count: numberOr(metrics.categoryCounts?.[category]) }))
@@ -526,6 +610,26 @@ window.AgentSkylineCore = (() => {
       return landmarks
     }
 
+    const ARCHITECTURE_BIASES = {
+      file: { archetypes: ['workshop', 'slab', 'stacked'], roofs: ['garden', 'equipment', 'flat'], materials: ['porcelain', 'limestone', 'glass'] },
+      shell: { archetypes: ['monolith', 'slab', 'stacked'], roofs: ['equipment', 'spire', 'flat'], materials: ['stone', 'glass', 'porcelain'] },
+      test: { archetypes: ['terraced', 'courtyard', 'stacked'], roofs: ['garden', 'lantern', 'flat'], materials: ['limestone', 'porcelain', 'glass'] },
+      web: { archetypes: ['lantern', 'needle', 'stacked'], roofs: ['lantern', 'spire', 'garden'], materials: ['glass', 'porcelain', 'limestone'] },
+      agent: { archetypes: ['arcology', 'terraced', 'lantern'], roofs: ['lantern', 'garden', 'spire'], materials: ['porcelain', 'glass', 'stone'] },
+      vision: { archetypes: ['gallery', 'lantern', 'terraced'], roofs: ['lantern', 'garden', 'flat'], materials: ['glass', 'limestone', 'porcelain'] },
+      reasoning: { archetypes: ['needle', 'monolith', 'terraced'], roofs: ['spire', 'lantern', 'garden'], materials: ['porcelain', 'stone', 'glass'] },
+      conversation: { archetypes: ['courtyard', 'gallery', 'terraced'], roofs: ['garden', 'lantern', 'flat'], materials: ['limestone', 'porcelain', 'glass'] },
+      other: { archetypes: ['slab', 'terraced', 'workshop'], roofs: ['flat', 'garden', 'equipment'], materials: ['stone', 'limestone', 'porcelain'] },
+    }
+
+    function addressedRandom(seed, index, property) {
+      return mulberry32(hashString(`${seed}:${index}:${property}`))()
+    }
+
+    function addressedPick(values, seed, index, property) {
+      return values[Math.min(values.length - 1, Math.floor(addressedRandom(seed, index, property) * values.length))]
+    }
+
     function generateBuildings(metrics, seedInput = 1, options = {}) {
       if (numberOr(metrics?.totalEvents) <= 0) return []
       const seed = hashString(`${seedInput}|${metrics.totalEvents}|${metrics.complexity}|${metrics.dominantCategory}`)
@@ -540,15 +644,27 @@ window.AgentSkylineCore = (() => {
         const target = Math.floor(rand() * (index + 1))
         ;[categoryPool[index], categoryPool[target]] = [categoryPool[target], categoryPool[index]]
       }
-      const cells = spiralCells(categoryPool.length + 1).slice(1)
+      const cells = urbanCells(categoryPool.length)
       const buildings = categoryPool.map((allocation, index) => {
         const cell = cells[index]
+        const bias = ARCHITECTURE_BIASES[allocation.category] || ARCHITECTURE_BIASES.other
         const sourceStrength = Math.log2(allocation.sourceCount + 1)
-        const centerBonus = Math.max(0, 4 - Math.max(Math.abs(cell.x), Math.abs(cell.y))) * 8
-        const height = Math.round(clamp(34 + sourceStrength * 13 + centerBonus + rand() * 42, 36, 176))
-        const footprint = 28 + Math.round(rand() * 12)
-        const depth = 18 + Math.round(rand() * 10)
-        const statusBias = metrics.outcomeCounts?.failure > 0 && rand() < Math.min(0.3, metrics.outcomeCounts.failure / Math.max(1, metrics.totalEvents))
+        const roofType = addressedPick(bias.roofs, seed, index, 'roofType')
+        const civicDistance = Math.max(Math.abs(cell.x), Math.abs(cell.y))
+        const civicSetback = Math.max(0, 5 - civicDistance) * 7
+        const outerLift = Math.max(0, civicDistance - 3) * 5
+        const requestedHeight = 42 + sourceStrength * 13 - civicSetback + outerLift + addressedRandom(seed, index, 'height') * 38
+        const roofReserve = roofType === 'spire' ? 42 : roofType === 'lantern' ? 22 : roofType === 'equipment' ? 14 : 9
+        const baseY = 296 + (cell.x + cell.y) * 18
+        const visibleHeight = Math.max(36, baseY - 20 - roofReserve)
+        const height = Math.round(clamp(Math.min(requestedHeight, visibleHeight), 36, 176))
+        const footprint = 22 + Math.round(addressedRandom(seed, index, 'footprint') * 10)
+        const depth = 15 + Math.round(addressedRandom(seed, index, 'depth') * 8)
+        const tierCount = clamp(1 + Math.floor(addressedRandom(seed, index, 'tierCount') * (height > 105 ? 3 : 2)), 1, 3)
+        const setbacks = Array.from({ length: tierCount - 1 }, (_, tier) =>
+          Math.round(3 + addressedRandom(seed, index, `setback:${tier}`) * 5))
+        const podiumHeight = Math.round(clamp(8 + addressedRandom(seed, index, 'podiumHeight') * Math.min(18, height * .18), 8, 24))
+        const failureChance = Math.min(.3, numberOr(metrics.outcomeCounts?.failure) / Math.max(1, metrics.totalEvents))
         return {
           id: `b_${index}_${hashString(`${seed}:${index}:${allocation.category}`).toString(36)}`,
           index,
@@ -559,10 +675,18 @@ window.AgentSkylineCore = (() => {
           footprint,
           depth,
           windows: clamp(Math.round(height / 16), 2, 10),
-          status: statusBias ? 'failure' : 'success',
-          crown: rand() > 0.72,
-          antenna: ['web', 'agent', 'reasoning'].includes(allocation.category) && rand() > 0.52,
-          seed: Math.floor(rand() * 1_000_000),
+          status: addressedRandom(seed, index, 'status') < failureChance ? 'failure' : 'success',
+          crown: ['lantern', 'garden'].includes(roofType),
+          antenna: roofType === 'spire',
+          seed: Math.floor(addressedRandom(seed, index, 'seed') * 1_000_000),
+          archetype: addressedPick(bias.archetypes, seed, index, 'archetype'),
+          tierCount,
+          setbacks,
+          roofType,
+          facadeRhythm: addressedPick(['regular', 'paired', 'vertical', 'ribbon'], seed, index, 'facadeRhythm'),
+          bayCount: clamp(2 + Math.floor(addressedRandom(seed, index, 'bayCount') * 5), 2, 6),
+          material: addressedPick(bias.materials, seed, index, 'material'),
+          podiumHeight,
         }
       })
       return buildings.sort((left, right) => (left.gridX + left.gridY) - (right.gridX + right.gridY) || left.index - right.index)
@@ -603,52 +727,285 @@ window.AgentSkylineCore = (() => {
       return `<polygon points="${points.map(point => `${point.x.toFixed(1)},${point.y.toFixed(1)}`).join(' ')}" ${attributes}/>`
     }
 
-    function buildingSvg(building, theme, ordinal, visible, animateReveal) {
-      const base = isoPoint(building.gridX, building.gridY)
-      const width = building.footprint
-      const depth = building.depth
-      const height = building.height
-      const top = { x: base.x, y: base.y - height }
-      const topLeft = { x: top.x - width, y: top.y + width * 0.48 }
-      const topRight = { x: top.x + depth, y: top.y + depth * 0.48 }
-      const topFar = { x: top.x - width + depth, y: top.y + (width + depth) * 0.48 }
-      const bottomLeft = { x: base.x - width, y: base.y + width * 0.48 }
-      const bottomRight = { x: base.x + depth, y: base.y + depth * 0.48 }
-      const bottomFar = { x: base.x - width + depth, y: base.y + (width + depth) * 0.48 }
-      const color = theme.category[building.category] || theme.category.other
-      const leftColor = mixHex(color, theme.background, 0.34)
-      const rightColor = mixHex(color, theme.background, 0.5)
-      const topColor = mixHex(color, '#FFFFFF', theme.id === 'paper' ? 0.08 : 0.22)
-      const opacity = visible ? 1 : 0
-      const transform = visible ? 'translate(0 0)' : 'translate(0 18px)'
-      const revealStyle = animateReveal ? 'animation:sky-rise .42s cubic-bezier(.2,.8,.2,1) both' : ''
-      let result = `<g class="sky-building" data-category="${building.category}" data-reveal="${animateReveal ? 'true' : 'false'}" style="opacity:${opacity};transform:${transform};transform-origin:${base.x}px ${base.y}px;${revealStyle}">`
-      result += polygon([topLeft, topFar, bottomFar, bottomLeft], `fill="${leftColor}"`)
-      result += polygon([topFar, topRight, bottomRight, bottomFar], `fill="${rightColor}"`)
-      result += polygon([top, topRight, topFar, topLeft], `fill="${topColor}"`)
-      const windowColor = building.status === 'failure' ? theme.danger : theme.success
-      const rows = building.windows
+    function interpolatePoint(from, to, progress) {
+      return {
+        x: from.x + (to.x - from.x) * progress,
+        y: from.y + (to.y - from.y) * progress,
+      }
+    }
+
+    function footprintPoints(anchor, width, depth) {
+      return [
+        anchor,
+        { x: anchor.x + depth, y: anchor.y + depth * .48 },
+        { x: anchor.x - width + depth, y: anchor.y + (width + depth) * .48 },
+        { x: anchor.x - width, y: anchor.y + width * .48 },
+      ]
+    }
+
+    function insetAnchor(anchor, widthDifference, depthDifference) {
+      return {
+        x: anchor.x - widthDifference * .5 + depthDifference * .5,
+        y: anchor.y + (widthDifference + depthDifference) * .24,
+      }
+    }
+
+    function prismGeometry(anchor, width, depth, height) {
+      const top = { x: anchor.x, y: anchor.y - height }
+      const [topFront, topRight, topFar, topLeft] = footprintPoints(top, width, depth)
+      const [bottomFront, bottomRight, bottomFar, bottomLeft] = footprintPoints(anchor, width, depth)
+      return {
+        anchor, width, depth, height, top,
+        topFront, topRight, topFar, topLeft,
+        bottomFront, bottomRight, bottomFar, bottomLeft,
+      }
+    }
+
+    function prismSvg(geometry, colors, className, attributes = '') {
+      return `<g class="${className}"${attributes ? ` ${attributes}` : ''}>
+        ${polygon([geometry.topLeft, geometry.topFar, geometry.bottomFar, geometry.bottomLeft], `fill="${colors.left}" stroke="${colors.edge}" stroke-width=".7"`)}
+        ${polygon([geometry.topFar, geometry.topRight, geometry.bottomRight, geometry.bottomFar], `fill="${colors.right}" stroke="${colors.edge}" stroke-width=".7"`)}
+        ${polygon([geometry.topFront, geometry.topRight, geometry.topFar, geometry.topLeft], `fill="${colors.top}" stroke="${colors.edge}" stroke-width=".7"`)}
+      </g>`
+    }
+
+    const ARCHETYPE_PROFILES = {
+      workshop: { width: 1.2, depth: 1.08, setback: .55, tierBias: .9 },
+      slab: { width: 1.24, depth: .78, setback: .68, tierBias: 1 },
+      stacked: { width: 1, depth: 1, setback: 1, tierBias: 1 },
+      monolith: { width: .9, depth: .94, setback: .42, tierBias: 1.08 },
+      terraced: { width: 1.12, depth: 1.04, setback: 1.38, tierBias: .86 },
+      courtyard: { width: 1.24, depth: 1.12, setback: .8, tierBias: .9 },
+      lantern: { width: .84, depth: .86, setback: .72, tierBias: 1.08 },
+      needle: { width: .66, depth: .72, setback: .5, tierBias: 1.18 },
+      arcology: { width: 1.06, depth: .96, setback: 1.14, tierBias: .98 },
+      gallery: { width: 1.18, depth: .88, setback: .72, tierBias: .88 },
+    }
+
+    const MATERIAL_NAMES = ['porcelain', 'limestone', 'glass', 'stone']
+    const ROOF_TYPES = ['flat', 'garden', 'equipment', 'lantern', 'spire']
+    const FACADE_RHYTHMS = ['regular', 'paired', 'vertical', 'ribbon']
+
+    function materialFaces(theme, material, lightness = 0) {
+      const base = theme.material[material] || theme.material.porcelain
+      return {
+        left: mixHex(base, theme.text, .09 + lightness),
+        right: mixHex(base, theme.text, .19 + lightness),
+        top: mixHex(base, theme.panel, .52),
+        edge: mixHex(base, theme.text, .28),
+      }
+    }
+
+    function facadeSvg(geometry, building, theme, category, rhythm, bayCount, tierIndex) {
+      const accent = theme.category[category] || theme.category.other
+      const windowColor = building.status === 'failure' ? theme.danger : mixHex(theme.material.glass, accent, .32)
+      const targetRows = rhythm === 'ribbon'
+        ? Math.round(geometry.height / 22)
+        : rhythm === 'vertical'
+          ? Math.round(geometry.height / 28)
+          : Math.round(geometry.height / 16)
+      const rows = clamp(Math.min(numberOr(building.windows, 10), targetRows), 1, 7)
+      const rowWidth = rhythm === 'ribbon' ? 3 : rhythm === 'paired' ? 1.7 : 1.15
+      const dash = rhythm === 'paired' ? ' stroke-dasharray="5 3"' : rhythm === 'ribbon' ? ` stroke-dasharray="${Math.max(3, 9 - bayCount)} 1.5"` : ''
+      let svg = `<g class="facade facade-${rhythm}" data-tier="${tierIndex}">`
       for (let row = 0; row < rows; row += 1) {
         const progress = (row + 1) / (rows + 1)
-        const yLeft = topLeft.y + (bottomLeft.y - topLeft.y) * progress
-        const xLeft = topLeft.x + 6
-        const yRight = topRight.y + (bottomRight.y - topRight.y) * progress
-        const xRight = topRight.x - 5
-        const lit = hashString(`${building.seed}:${row}`) % 4 !== 0
-        result += `<path d="M${xLeft} ${yLeft}l${Math.max(5, width - 12)} ${Math.max(2, width * .07)}" stroke="${lit ? windowColor : theme.grid}" stroke-width="2" opacity="${lit ? .72 : .32}"/>`
-        result += `<path d="M${xRight} ${yRight}l${-Math.max(4, depth - 10)} ${Math.max(2, depth * .07)}" stroke="${lit ? windowColor : theme.grid}" stroke-width="2" opacity="${lit ? .58 : .28}"/>`
+        const leftStart = interpolatePoint(geometry.topLeft, geometry.bottomLeft, progress)
+        const leftEnd = interpolatePoint(geometry.topFar, geometry.bottomFar, progress)
+        const rightStart = interpolatePoint(geometry.topFar, geometry.bottomFar, progress)
+        const rightEnd = interpolatePoint(geometry.topRight, geometry.bottomRight, progress)
+        const lit = hashString(`${building.seed}:${tierIndex}:${row}`) % 5 !== 0
+        const opacity = lit ? (rhythm === 'ribbon' ? .72 : .58) : .24
+        svg += `<path class="facade-row" d="M${leftStart.x.toFixed(1)} ${leftStart.y.toFixed(1)}L${leftEnd.x.toFixed(1)} ${leftEnd.y.toFixed(1)}" stroke="${lit ? windowColor : theme.grid}" stroke-width="${rowWidth}" opacity="${opacity}"${dash}/>`
+        svg += `<path class="facade-row" d="M${rightStart.x.toFixed(1)} ${rightStart.y.toFixed(1)}L${rightEnd.x.toFixed(1)} ${rightEnd.y.toFixed(1)}" stroke="${lit ? windowColor : theme.grid}" stroke-width="${rowWidth}" opacity="${Math.max(.18, opacity - .1)}"${dash}/>`
       }
-      if (building.crown) {
-        result += polygon([
-          { x: top.x - width * .48, y: top.y + width * .25 },
-          { x: top.x + depth * .52, y: top.y + depth * .25 },
-          { x: top.x - width * .48 + depth, y: top.y + (width + depth) * .25 },
-        ], `fill="none" stroke="${mixHex(color, '#FFFFFF', .34)}" stroke-width="2" opacity=".82"`)
+      for (let bay = 1; bay < bayCount; bay += 1) {
+        const progress = bay / bayCount
+        const leftTop = interpolatePoint(geometry.topLeft, geometry.topFar, progress)
+        const leftBottom = interpolatePoint(geometry.bottomLeft, geometry.bottomFar, progress)
+        const rightTop = interpolatePoint(geometry.topFar, geometry.topRight, progress)
+        const rightBottom = interpolatePoint(geometry.bottomFar, geometry.bottomRight, progress)
+        const pairedOpacity = rhythm === 'paired' ? (bay % 2 ? .68 : .28) : rhythm === 'ribbon' ? .22 : .48
+        const bayWidth = rhythm === 'vertical' ? 1.45 : .72
+        svg += `<path class="facade-bay" d="M${leftTop.x.toFixed(1)} ${(leftTop.y + 2).toFixed(1)}L${leftBottom.x.toFixed(1)} ${(leftBottom.y - 2).toFixed(1)}" stroke="${accent}" stroke-width="${bayWidth}" opacity="${pairedOpacity}"/>`
+        svg += `<path class="facade-bay" d="M${rightTop.x.toFixed(1)} ${(rightTop.y + 2).toFixed(1)}L${rightBottom.x.toFixed(1)} ${(rightBottom.y - 2).toFixed(1)}" stroke="${accent}" stroke-width="${bayWidth}" opacity="${Math.max(.18, pairedOpacity - .08)}"/>`
       }
-      if (building.antenna) {
-        result += `<path d="M${top.x - width * .34 + depth * .34} ${top.y + (width + depth) * .17}v-${18 + (building.seed % 18)}" stroke="${color}" stroke-width="2" stroke-linecap="round"/>`
-        result += `<circle cx="${top.x - width * .34 + depth * .34}" cy="${top.y + (width + depth) * .17 - 20 - (building.seed % 18)}" r="2.5" fill="${theme.text}"/>`
+      svg += `<path class="category-spine" d="M${geometry.topRight.x.toFixed(1)} ${geometry.topRight.y.toFixed(1)}L${geometry.bottomRight.x.toFixed(1)} ${geometry.bottomRight.y.toFixed(1)}" stroke="${accent}" stroke-width="1.6" opacity=".74"/>`
+      svg += '</g>'
+      return svg
+    }
+
+    function footprintCenter(anchor, width, depth) {
+      return {
+        x: anchor.x + (-width + depth) * .5,
+        y: anchor.y + (width + depth) * .24,
       }
+    }
+
+    function roofCenter(geometry) {
+      return footprintCenter(geometry.top, geometry.width, geometry.depth)
+    }
+
+    function roofSvg(roofType, geometry, theme, accent, seed) {
+      const center = roofCenter(geometry)
+      const insetWidth = geometry.width * .26
+      const insetDepth = geometry.depth * .26
+      const roofWidth = Math.max(6, geometry.width - insetWidth)
+      const roofDepth = Math.max(5, geometry.depth - insetDepth)
+      const roofAnchor = insetAnchor(geometry.top, insetWidth, insetDepth)
+      const roofPlot = footprintPoints(roofAnchor, roofWidth, roofDepth)
+      if (roofType === 'garden') {
+        const treeOffset = 3 + (seed % 4)
+        return `<g class="building-roof roof-garden" data-roof-type="garden">
+          ${polygon(roofPlot, `fill="${theme.planting}" fill-opacity=".72" stroke="${mixHex(theme.planting, theme.text, .26)}" stroke-width="1"`)}
+          <circle cx="${(center.x - treeOffset).toFixed(1)}" cy="${(center.y - 4).toFixed(1)}" r="3.2" fill="${mixHex(theme.planting, theme.panel, .12)}"/>
+          <circle cx="${(center.x + treeOffset).toFixed(1)}" cy="${(center.y + 1).toFixed(1)}" r="2.4" fill="${mixHex(theme.planting, theme.text, .08)}"/>
+        </g>`
+      }
+      if (roofType === 'equipment') {
+        const unitWidth = Math.max(5, roofWidth * .34)
+        const unitDepth = Math.max(4, roofDepth * .36)
+        const unitAnchor = insetAnchor(geometry.top, geometry.width - unitWidth, geometry.depth - unitDepth)
+        const unit = prismGeometry(unitAnchor, unitWidth, unitDepth, 7 + (seed % 4))
+        const colors = materialFaces(theme, 'stone', .02)
+        return `<g class="building-roof roof-equipment" data-roof-type="equipment">
+          ${prismSvg(unit, colors, 'roof-equipment-unit')}
+          <circle cx="${center.x.toFixed(1)}" cy="${(center.y - 5).toFixed(1)}" r="2.5" fill="none" stroke="${accent}" stroke-width="1.2"/>
+        </g>`
+      }
+      if (roofType === 'lantern') {
+        const lanternWidth = Math.max(7, roofWidth * .46)
+        const lanternDepth = Math.max(6, roofDepth * .5)
+        const lanternAnchor = insetAnchor(geometry.top, geometry.width - lanternWidth, geometry.depth - lanternDepth)
+        const lantern = prismGeometry(lanternAnchor, lanternWidth, lanternDepth, 12 + (seed % 7))
+        const colors = materialFaces(theme, 'glass', 0)
+        return `<g class="building-roof roof-lantern" data-roof-type="lantern">${prismSvg(lantern, colors, 'roof-lantern-house', `stroke="${accent}"`)}</g>`
+      }
+      if (roofType === 'spire') {
+        const spireHeight = 22 + (seed % 18)
+        return `<g class="building-roof roof-spire" data-roof-type="spire">
+          <path d="M${(center.x - 5).toFixed(1)} ${center.y.toFixed(1)}L${center.x.toFixed(1)} ${(center.y - spireHeight * .62).toFixed(1)}L${(center.x + 5).toFixed(1)} ${center.y.toFixed(1)}Z" fill="${mixHex(accent, theme.panel, .28)}" stroke="${accent}" stroke-width="1"/>
+          <path d="M${center.x.toFixed(1)} ${(center.y - spireHeight * .58).toFixed(1)}V${(center.y - spireHeight).toFixed(1)}" stroke="${accent}" stroke-width="1.7" stroke-linecap="round"/>
+          <circle cx="${center.x.toFixed(1)}" cy="${(center.y - spireHeight).toFixed(1)}" r="2" fill="${theme.danger}"/>
+        </g>`
+      }
+      return `<g class="building-roof roof-flat" data-roof-type="flat">${polygon(roofPlot, `fill="none" stroke="${accent}" stroke-width="1.2" opacity=".72"`)}</g>`
+    }
+
+    function archetypeDetailSvg(archetype, podium, tiers, theme, accent) {
+      const first = tiers[0]
+      const last = tiers[tiers.length - 1]
+      if (!first || !last) return ''
+      if (archetype === 'courtyard') {
+        const width = Math.max(7, last.width * .42)
+        const depth = Math.max(6, last.depth * .42)
+        const anchor = insetAnchor(last.top, last.width - width, last.depth - depth)
+        return `<g class="archetype-detail archetype-courtyard">${polygon(footprintPoints(anchor, width, depth), `fill="${theme.ground}" stroke="${theme.planting}" stroke-width="1.3"`)}</g>`
+      }
+      if (archetype === 'terraced') {
+        return `<g class="archetype-detail archetype-terraced">${tiers.map(tier => {
+          const width = Math.max(5, tier.width * .3)
+          const depth = Math.max(4, tier.depth * .22)
+          const anchor = insetAnchor(tier.top, tier.width - width, tier.depth - depth)
+          return polygon(footprintPoints(anchor, width, depth), `fill="${theme.planting}" fill-opacity=".54" stroke="${theme.planting}" stroke-width=".7"`)
+        }).join('')}</g>`
+      }
+      if (archetype === 'arcology') {
+        return `<g class="archetype-detail archetype-arcology" fill="none" stroke="${accent}" stroke-width="1" opacity=".62">
+          <path d="M${first.topFar.x.toFixed(1)} ${first.topFar.y.toFixed(1)}L${first.bottomRight.x.toFixed(1)} ${first.bottomRight.y.toFixed(1)}M${first.topRight.x.toFixed(1)} ${first.topRight.y.toFixed(1)}L${first.bottomFar.x.toFixed(1)} ${first.bottomFar.y.toFixed(1)}"/>
+        </g>`
+      }
+      if (archetype === 'gallery') {
+        return `<g class="archetype-detail archetype-gallery">${polygon([podium.topLeft, podium.topFar, first.bottomFar, first.bottomLeft], `fill="${theme.material.glass}" fill-opacity=".48" stroke="${accent}" stroke-width="1"`)}</g>`
+      }
+      if (archetype === 'workshop') {
+        const start = last.topLeft
+        const end = last.topFar
+        const one = interpolatePoint(start, end, .33)
+        const two = interpolatePoint(start, end, .66)
+        return `<path class="archetype-detail archetype-workshop" d="M${start.x.toFixed(1)} ${start.y.toFixed(1)}L${one.x.toFixed(1)} ${(one.y - 5).toFixed(1)}L${two.x.toFixed(1)} ${two.y.toFixed(1)}L${end.x.toFixed(1)} ${(end.y - 5).toFixed(1)}" fill="none" stroke="${accent}" stroke-width="1.2"/>`
+      }
+      if (archetype === 'needle') {
+        return `<g class="archetype-detail archetype-needle" fill="none" stroke="${accent}" stroke-width="1.3" opacity=".7"><path d="M${podium.topLeft.x.toFixed(1)} ${podium.topLeft.y.toFixed(1)}L${first.topLeft.x.toFixed(1)} ${first.topLeft.y.toFixed(1)}M${podium.topRight.x.toFixed(1)} ${podium.topRight.y.toFixed(1)}L${first.topRight.x.toFixed(1)} ${first.topRight.y.toFixed(1)}"/></g>`
+      }
+      if (archetype === 'lantern') {
+        return `<path class="archetype-detail archetype-lantern" d="M${last.topFar.x.toFixed(1)} ${last.topFar.y.toFixed(1)}L${last.bottomFar.x.toFixed(1)} ${last.bottomFar.y.toFixed(1)}" stroke="${accent}" stroke-width="2.4" opacity=".76"/>`
+      }
+      if (archetype === 'monolith') {
+        const roof = roofCenter(last)
+        const base = footprintCenter(first.anchor, first.width, first.depth)
+        const end = interpolatePoint(roof, base, .68)
+        return `<path class="archetype-detail archetype-monolith" d="M${roof.x.toFixed(1)} ${roof.y.toFixed(1)}L${end.x.toFixed(1)} ${end.y.toFixed(1)}" stroke="${accent}" stroke-width="1.6" opacity=".62"/>`
+      }
+      if (archetype === 'slab') {
+        return `<path class="archetype-detail archetype-slab" d="M${podium.topLeft.x.toFixed(1)} ${podium.topLeft.y.toFixed(1)}L${podium.topFar.x.toFixed(1)} ${podium.topFar.y.toFixed(1)}" stroke="${accent}" stroke-width="3" opacity=".52"/>`
+      }
+      return `<g class="archetype-detail archetype-stacked">${tiers.map(tier => polygon(
+        [tier.topFront, tier.topRight, tier.topFar, tier.topLeft],
+        `fill="none" stroke="${accent}" stroke-width=".6" opacity=".36"`,
+      )).join('')}</g>`
+    }
+
+    function buildingSvg(building, theme, ordinal, visible, animateReveal) {
+      const base = isoPoint(building.gridX, building.gridY)
+      const category = CATEGORY_ORDER.includes(building.category) ? building.category : 'other'
+      const archetype = ARCHETYPE_PROFILES[building.archetype] ? building.archetype : 'stacked'
+      const profile = ARCHETYPE_PROFILES[archetype]
+      const material = MATERIAL_NAMES.includes(building.material) ? building.material : 'porcelain'
+      const rhythm = FACADE_RHYTHMS.includes(building.facadeRhythm) ? building.facadeRhythm : 'regular'
+      const roofType = ROOF_TYPES.includes(building.roofType)
+        ? building.roofType
+        : building.antenna
+          ? 'spire'
+          : building.crown
+            ? 'lantern'
+            : 'flat'
+      const height = clamp(numberOr(building.height, 48), 24, 220)
+      const podiumHeight = clamp(numberOr(building.podiumHeight, 9), 6, Math.max(6, height - 14))
+      const towerHeight = Math.max(14, height - podiumHeight)
+      const tierCount = clamp(Math.round(numberOr(building.tierCount, 1)), 1, 4)
+      const bayCount = clamp(Math.round(numberOr(building.bayCount, 3)), 2, 8)
+      const sourceWidth = clamp(numberOr(building.footprint, 30), 18, 54)
+      const sourceDepth = clamp(numberOr(building.depth, 22), 14, 42)
+      const towerWidth = sourceWidth * profile.width
+      const towerDepth = sourceDepth * profile.depth
+      const podiumWidth = towerWidth + 8
+      const podiumDepth = towerDepth + 7
+      const accent = theme.category[category] || theme.category.other
+      const opacity = visible ? 1 : 0
+      const transform = visible ? 'translate(0 0)' : 'translate(0 18px)'
+      const shadowAnchor = { x: base.x + 13, y: base.y + 9 }
+      let result = `<g class="sky-building" data-category="${category}" data-archetype="${archetype}" data-material="${material}" data-facade-rhythm="${rhythm}" data-bay-count="${bayCount}" data-tier-count="${tierCount}" data-roof-type="${roofType}" data-order="${ordinal}" data-visible="${visible ? 'true' : 'false'}" data-reveal="${animateReveal ? 'true' : 'false'}" style="opacity:${opacity};transform:${transform};transform-origin:${base.x}px ${base.y}px">`
+      result += polygon(footprintPoints(shadowAnchor, podiumWidth, podiumDepth), `class="building-shadow" fill="${theme.shadow}" fill-opacity=".2"`)
+      const podium = prismGeometry(base, podiumWidth, podiumDepth, podiumHeight)
+      result += prismSvg(podium, materialFaces(theme, material, .02), 'building-podium', `data-height="${podiumHeight.toFixed(1)}"`)
+      let tierAnchor = insetAnchor(podium.top, podiumWidth - towerWidth, podiumDepth - towerDepth)
+      let tierWidth = towerWidth
+      let tierDepth = towerDepth
+      const weights = Array.from({ length: tierCount }, (_, index) => Math.pow(profile.tierBias, index))
+      const totalWeight = weights.reduce((sum, value) => sum + value, 0)
+      const tiers = []
+      let usedHeight = 0
+      for (let tierIndex = 0; tierIndex < tierCount; tierIndex += 1) {
+        const tierHeight = tierIndex === tierCount - 1
+          ? towerHeight - usedHeight
+          : towerHeight * weights[tierIndex] / totalWeight
+        const tier = prismGeometry(tierAnchor, tierWidth, tierDepth, tierHeight)
+        tiers.push(tier)
+        result += prismSvg(tier, materialFaces(theme, material, tierIndex * .012), 'building-tier', `data-tier="${tierIndex}"`)
+        result += facadeSvg(tier, building, theme, category, rhythm, bayCount, tierIndex)
+        usedHeight += tierHeight
+        if (tierIndex < tierCount - 1) {
+          const requested = clamp(numberOr(building.setbacks?.[tierIndex], 4), 1, 12) * profile.setback
+          const nextWidth = Math.max(12, tierWidth - requested * 2)
+          const nextDepth = Math.max(10, tierDepth - requested * 1.45)
+          tierAnchor = insetAnchor(tier.top, tierWidth - nextWidth, tierDepth - nextDepth)
+          tierWidth = nextWidth
+          tierDepth = nextDepth
+        }
+      }
+      result += archetypeDetailSvg(archetype, podium, tiers, theme, accent)
+      result += roofSvg(roofType, tiers[tiers.length - 1], theme, accent, numberOr(building.seed))
       result += '</g>'
       return result
     }
@@ -674,27 +1031,38 @@ window.AgentSkylineCore = (() => {
 
     function renderGround(theme) {
       const points = [isoPoint(-5, -5), isoPoint(6, -5), isoPoint(6, 6), isoPoint(-5, 6)]
-      let svg = polygon(points, `fill="${theme.ground}" stroke="${theme.grid}" stroke-width="1.5"`)
+      let svg = `<g class="city-ground">${polygon(points, `fill="${theme.ground}" stroke="${theme.grid}" stroke-width="1.5"`)}`
       for (let index = -5; index <= 6; index += 1) {
         const fromA = isoPoint(index, -5)
         const toA = isoPoint(index, 6)
         const fromB = isoPoint(-5, index)
         const toB = isoPoint(6, index)
-        svg += `<path d="M${fromA.x} ${fromA.y}L${toA.x} ${toA.y}M${fromB.x} ${fromB.y}L${toB.x} ${toB.y}" stroke="${theme.grid}" stroke-width="1" opacity=".48"/>`
+        svg += `<path class="plot-grid" d="M${fromA.x} ${fromA.y}L${toA.x} ${toA.y}M${fromB.x} ${fromB.y}L${toB.x} ${toB.y}" stroke="${theme.grid}" stroke-width=".8" opacity=".34"/>`
       }
-      return svg
-    }
-
-    function renderStars(seed, theme) {
-      const rand = mulberry32(seed ^ 0xA1B2C3)
-      let stars = ''
-      for (let index = 0; index < 42; index += 1) {
-        const x = 430 + rand() * 740
-        const y = 32 + rand() * 260
-        const radius = .5 + rand() * 1.8
-        stars += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${radius.toFixed(1)}" fill="${theme.text}" opacity="${(.15 + rand() * .55).toFixed(2)}"/>`
+      const roadAxes = [
+        [isoPoint(-5, -.55), isoPoint(6, -.55)],
+        [isoPoint(-5, .55), isoPoint(6, .55)],
+        [isoPoint(-.55, -5), isoPoint(-.55, 6)],
+        [isoPoint(.55, -5), isoPoint(.55, 6)],
+      ]
+      for (const [from, to] of roadAxes) {
+        svg += `<path class="city-road" d="M${from.x} ${from.y}L${to.x} ${to.y}" stroke="${theme.road}" stroke-width="10" stroke-linecap="square"/>`
+        svg += `<path class="road-centerline" d="M${from.x} ${from.y}L${to.x} ${to.y}" stroke="${theme.roadLine}" stroke-width="1" stroke-dasharray="7 6" opacity=".82"/>`
       }
-      return stars
+      for (const [gridX, gridY] of [[-4, -2], [4, 2], [-2, 4], [3, -3]]) {
+        const anchor = isoPoint(gridX, gridY)
+        const park = footprintPoints(anchor, 20, 15)
+        const center = { x: anchor.x - 2.5, y: anchor.y + 8.4 }
+        svg += `<g class="pocket-park">${polygon(park, `fill="${mixHex(theme.planting, theme.panel, .36)}" stroke="${theme.planting}" stroke-width="1"`)}<circle cx="${center.x}" cy="${center.y - 5}" r="4" fill="${theme.planting}"/><path d="M${center.x} ${center.y - 2}v6" stroke="${mixHex(theme.planting, theme.text, .28)}" stroke-width="1.2"/></g>`
+      }
+      const plaza = isoPoint(0, 0)
+      svg += `<g class="civic-plaza">
+        <ellipse cx="${plaza.x}" cy="${plaza.y + 8}" rx="46" ry="23" fill="${theme.panel}" stroke="${theme.grid}" stroke-width="2"/>
+        <ellipse cx="${plaza.x}" cy="${plaza.y + 8}" rx="29" ry="14" fill="none" stroke="${theme.accent2}" stroke-width="1.4"/>
+        <ellipse cx="${plaza.x}" cy="${plaza.y + 8}" rx="11" ry="5.5" fill="${theme.water}" stroke="${theme.accent}" stroke-width="1"/>
+        <path d="M${plaza.x} ${plaza.y + 7}v-18" stroke="${theme.accent}" stroke-width="1.5"/><circle cx="${plaza.x}" cy="${plaza.y - 12}" r="2" fill="${theme.accent}"/>
+      </g>`
+      return `${svg}</g>`
     }
 
     function renderLegend(metrics, theme) {
@@ -712,9 +1080,12 @@ window.AgentSkylineCore = (() => {
 
     /** Render a self-contained, screenshot-ready SVG. */
     function renderSkylineSvg(model, options = {}) {
-      const theme = THEMES[options.theme] || THEMES.midnight
+      const theme = THEMES[options.theme] || THEMES.paper
       const width = 1200
       const height = 720
+      const layout = options.layout === 'scene' ? 'scene' : 'card'
+      const scene = layout === 'scene'
+      const viewBox = scene ? '350 20 900 540' : `0 0 ${width} ${height}`
       const visibleCount = clamp(Math.round(numberOr(options.visibleCount, model.buildings.length)), 0, model.buildings.length)
       const metrics = model.metrics
       const title = firstString(options.title) || model.identity.cityName
@@ -729,26 +1100,8 @@ window.AgentSkylineCore = (() => {
         Boolean(options.animateReveal) && visibleCount > 0 && index === visibleCount - 1,
       )).join('')
       const landmarkText = model.landmarks.slice(0, 3).map(item => item.label).join(' · ') || 'First block established'
-      const paper = theme.id === 'paper'
-      return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="sky-title sky-desc">
-      <title id="sky-title">${escapeXml(title)} — Agent Skyline</title>
-      <desc id="sky-desc">A privacy-safe procedural city generated from coarse Agent activity counts.</desc>
-      <defs>
-        <style>@keyframes sky-rise{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}@media (prefers-reduced-motion:reduce){.sky-building{animation:none!important}}</style>
-        <linearGradient id="sky-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${theme.background}"/><stop offset="1" stop-color="${theme.background2}"/></linearGradient>
-        <radialGradient id="sky-halo" cx="70%" cy="42%" r="48%"><stop offset="0" stop-color="${theme.glow}" stop-opacity="${paper ? .13 : .24}"/><stop offset="1" stop-color="${theme.glow}" stop-opacity="0"/></radialGradient>
-        <filter id="sky-shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="${theme.background}" flood-opacity=".48"/></filter>
-        <filter id="sky-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="32"/></filter>
-        <clipPath id="sky-round"><rect x="0" y="0" width="1200" height="720" rx="30"/></clipPath>
-      </defs>
-      <g clip-path="url(#sky-round)">
-        <rect width="1200" height="720" fill="url(#sky-bg)"/>
-        <rect width="1200" height="720" fill="url(#sky-halo)"/>
-        ${paper ? '' : renderStars(model.seed, theme)}
-        <circle cx="865" cy="258" r="176" fill="${theme.glow}" opacity="${paper ? .06 : .09}" filter="url(#sky-soft)"/>
-        <g opacity=".9" filter="url(#sky-shadow)">${renderGround(theme)}</g>
-        <g>${buildingLayer}</g>
-        <rect x="30" y="30" width="358" height="660" rx="24" fill="${theme.panel}" fill-opacity="${paper ? .82 : .7}" stroke="${theme.grid}"/>
+      const metadataPanel = scene ? '' : `
+        <rect x="30" y="30" width="358" height="660" rx="24" fill="${theme.panel}" fill-opacity=".92" stroke="${theme.grid}"/>
         <g transform="translate(58 58)">
           <g transform="translate(0 0)">
             <rect width="34" height="34" rx="11" fill="${theme.accent}" fill-opacity=".18" stroke="${theme.accent}"/>
@@ -776,13 +1129,29 @@ window.AgentSkylineCore = (() => {
           <rect width="302" height="1" fill="${theme.grid}"/>
           <text y="25" fill="${theme.muted}" font-size="10.5" font-weight="620">No prompts · no paths · no cloud</text>
           <text y="46" fill="${theme.text}" font-size="10.5" font-weight="700">github:LeemanCheung/dsh-agent-skyline</text>
-        </g>
-        <g transform="translate(1015 656)">
+        </g>`
+      const cardFooter = scene ? '' : `
+        <g class="card-footer" transform="translate(1015 656)">
           <text text-anchor="end" fill="${theme.muted}" font-size="10" font-weight="700" letter-spacing="1">BUILT FROM SIGNALS, NOT CONTENT</text>
           <text x="124" text-anchor="end" y="22" fill="${theme.text}" font-size="12" font-weight="720">${visibleCount}/${model.buildings.length} TOWERS ONLINE</text>
-        </g>
+        </g>`
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="${viewBox}" role="img" aria-labelledby="sky-title sky-desc" data-theme="${theme.id}" data-layout="${layout}">
+      <title id="sky-title">${escapeXml(title)} — Agent Skyline</title>
+      <desc id="sky-desc">A privacy-safe procedural city generated from coarse Agent activity counts.</desc>
+      <defs>
+        <style>@keyframes sky-rise{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}.sky-building[data-reveal="true"]{animation:sky-rise .42s cubic-bezier(.2,.8,.2,1) both}@media (prefers-reduced-motion:reduce){.sky-building[data-reveal="true"]{animation:none}}</style>
+        <pattern id="sky-drafting-grid" width="34" height="18" patternUnits="userSpaceOnUse"><path d="M0 18L34 0M0 0L34 18" fill="none" stroke="${theme.grid}" stroke-width=".55" opacity=".3"/></pattern>
+        <clipPath id="sky-round"><rect x="0" y="0" width="1200" height="720" rx="30"/></clipPath>
+      </defs>
+      <g${scene ? '' : ' clip-path="url(#sky-round)"'}>
+        <rect x="${scene ? 350 : 0}" y="${scene ? 20 : 0}" width="${scene ? 900 : 1200}" height="${scene ? 540 : 720}" fill="${theme.background}"/>
+        <rect x="${scene ? 350 : 402}" y="${scene ? 20 : 0}" width="${scene ? 900 : 798}" height="${scene ? 540 : 720}" fill="url(#sky-drafting-grid)" opacity=".72"/>
+        <g opacity=".98">${renderGround(theme)}</g>
+        <g>${buildingLayer}</g>
+    ${metadataPanel}
+    ${cardFooter}
       </g>
-      <rect x=".75" y=".75" width="1198.5" height="718.5" rx="29.25" fill="none" stroke="${theme.grid}" stroke-width="1.5"/>
+    ${scene ? '' : `<rect class="card-border" x=".75" y=".75" width="1198.5" height="718.5" rx="29.25" fill="none" stroke="${theme.grid}" stroke-width="1.5"/>`}
     </svg>`
     }
 
@@ -800,5 +1169,5 @@ window.AgentSkylineCore = (() => {
       return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(String(svg))}`
     }
 
-  return { SKYLINE_SCHEMA_VERSION, HISTORY_STORAGE_KEY, CATEGORY_ORDER, CATEGORY_META, THEMES, hashString, escapeXml, normalizeSessionNodes, summarizeEvents, createSessionSnapshot, createEmptyHistory, parseHistory, upsertHistory, summarizeHistory, generateBuildings, buildSkyline, buildSkylineFromMetrics, renderSkylineSvg, buildShareCaption, dataUrlForSvg };
+  return { SKYLINE_SCHEMA_VERSION, HISTORY_STORAGE_KEY, CATEGORY_ORDER, CATEGORY_META, THEMES, hashString, escapeXml, getFocusableElements, getFocusTrapTarget, copyTextWithFallback, normalizeSessionNodes, summarizeEvents, createSessionSnapshot, createEmptyHistory, parseHistory, upsertHistory, summarizeHistory, generateBuildings, buildSkyline, buildSkylineFromMetrics, renderSkylineSvg, buildShareCaption, dataUrlForSvg };
 })();

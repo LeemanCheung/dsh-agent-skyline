@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-30T16:17:00+08:00",
+  "generator": {
+    "mode": "Codex built-in image generation",
+    "purpose": "design reference only"
+  },
+  "runtimePolicy": "These bitmaps are not loaded, bundled, or transmitted by the plugin runtime. The deterministic SVG renderer translates their visual principles into code-native geometry.",
+  "assets": [
+    {
+      "file": "skyline-architecture-modules-20260830.png",
+      "status": "visual-reference",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 2355244,
+      "sha256": "27907f67f9ae5df912611183247dcdd6414e9d1e5fceb0e639a5fb0cffd1d9bf",
+      "promptSource": "../prompt/skyline-light-asset-sheet-20260828.md",
+      "acceptanceUse": [
+        "consistent orthographic isometric camera",
+        "architectural family and roof vocabulary",
+        "daylight mineral material balance",
+        "road, park, plaza, and landmark details"
+      ]
+    },
+    {
+      "file": "skyline-city-concept-20260830.png",
+      "status": "visual-reference",
+      "width": 1672,
+      "height": 941,
+      "bytes": 3174261,
+      "sha256": "ec9d3f8dbe13fe268297eb07ea56e4747dd1dc8880fda61eb6e5b77bbb425d7a",
+      "promptSource": "../prompt/skyline-light-city-concept-20260828.md",
+      "acceptanceUse": [
+        "city-first composition",
+        "central civic plaza and road loop",
+        "coherent district depth",
+        "single daylight and southeast-shadow system"
+      ]
+    }
+  ]
+}

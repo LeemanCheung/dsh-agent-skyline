@@ -1,6 +1,6 @@
 {
   "name": "dsh-agent-skyline",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Turn every DeepSeek Harness Agent session into a private, animated, shareable procedural city.",
   "type": "module",
   "main": "lib/index.js",
@@ -25,7 +25,10 @@
     "build": "node scripts/build.mjs",
     "test": "node --test scripts/*.test.mjs",
     "demo": "node scripts/render-demo.mjs",
-    "check": "node --check src/client.js && node --check src/core.js && node --check demo/app.js && npm test && npm run build && node --check lib/client.js && node --check demo/core.js && node scripts/smoke.mjs && npm run demo",
+    "assets:verify": "node scripts/check-assets.mjs",
+    "determinism": "node scripts/check-determinism.mjs",
+    "pack": "npm pack --dry-run --json",
+    "check": "node --check src/client.js && node --check src/core.js && node --check demo/app.js && node scripts/check-workflows.mjs && npm test && npm run build && node --check lib/client.js && node --check demo/core.js && npm run demo && node scripts/smoke.mjs && npm run assets:verify",
     "prepublishOnly": "npm run check"
   },
   "dsh": {

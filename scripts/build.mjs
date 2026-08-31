@@ -14,7 +14,7 @@ const indent = text => text.split('\n').map(line => (line ? `    ${line}` : ''))
 const embeddedCore = coreSource.replace(/^export /gm, '')
 const coreExports = [
   'SKYLINE_SCHEMA_VERSION', 'HISTORY_STORAGE_KEY', 'CATEGORY_ORDER', 'CATEGORY_META', 'THEMES',
-  'hashString', 'escapeXml', 'normalizeSessionNodes', 'summarizeEvents', 'createSessionSnapshot',
+  'hashString', 'escapeXml', 'getFocusableElements', 'getFocusTrapTarget', 'copyTextWithFallback', 'normalizeSessionNodes', 'summarizeEvents', 'createSessionSnapshot',
   'createEmptyHistory', 'parseHistory', 'upsertHistory', 'summarizeHistory', 'generateBuildings',
   'buildSkyline', 'buildSkylineFromMetrics', 'renderSkylineSvg', 'buildShareCaption', 'dataUrlForSvg',
 ]

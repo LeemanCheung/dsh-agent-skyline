@@ -2,6 +2,21 @@
 
 All notable changes to this project are documented here.
 
+## [1.1.0] - 2026-08-31
+
+### Changed
+
+- Replaced the dark modal and visual climates with a DSH-native light workspace and four daylight palettes while preserving persisted theme IDs.
+- Upgraded procedural buildings with category-biased archetypes, tiered setbacks, material faces, facade rhythms, bay counts, podiums, and five roof families.
+- Reserved a central civic plaza, cross roads, park lots, and a low-rise buffer so urban structure remains visible at high activity counts.
+- Split the city-focused in-app `scene` SVG from the self-contained export `card` layout.
+- Added modal focus containment, body scroll locking, bilingual visible theme labels, app-owned clear-history confirmation, truthful PNG fallback, and copy-failure feedback.
+- Made the standalone demo source-owned so deterministic asset generation cannot overwrite it with an obsolete template.
+- Regenerated the desktop, mobile, export, social, theme-matrix, construction, and architecture assets in the daylight system.
+- Expanded the automated suite to 27 tests and added strict design-context and static UI audits.
+- Replaced six competing main-writing/tag-forcing delivery workflows with one read-only CI path and one immutable-tag release path, guarded by a repository-local workflow policy check.
+- Paired DSH contrast-fill and inverted-label tokens for primary actions so export controls remain readable in the real Host dark theme.
+
 ## [1.0.0] - 2026-08-26
 
 ### Added

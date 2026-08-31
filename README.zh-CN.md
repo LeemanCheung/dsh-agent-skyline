@@ -11,13 +11,15 @@
 - **本次会话、今天、近 7 天、全部历史** 四种城市视角；
 - **一键回放建城过程**，可拖动时间轴逐栋查看；
 - **PNG / SVG 导出**与自动生成分享文案；
-- **Midnight / Aurora / Sunset / Paper** 四套完整视觉气候；
+- **Blueprint / Garden / Terracotta / Paper** 四套日光视觉气候；
 - **地标解锁、城市身份、稳定 City ID**，形成可收藏的个人资产；
 - 历史仅保存在浏览器 `localStorage`，不会创建服务器、数据库或遥测服务。
 
 ![Agent Skyline 建城回放](docs/construction.gif)
 
 [本地交互演示源码](demo/) · [English README](README.md) · [选题分析](docs/market-analysis.zh-CN.md) · [首发方案](docs/launch-playbook.zh-CN.md)
+
+> **发布目标：** 当前分支及截图对应已完成本地终审的 `v1.1.0` 日光重设计。下方安装命令固定到不可变的 `v1.1.0` Tag，该 Tag 发布后即可使用。
 
 ## 为什么它更有传播潜力
 
@@ -31,37 +33,37 @@
 
 ## 核心功能
 
-| 模块 | 能力 |
-| --- | --- |
-| 城市生成 | 根据会话节点确定性生成等距程序化城市，相同会话得到稳定结果 |
-| 四种时间范围 | Session / Today / 7-day / All-time，历史按会话去重聚合 |
-| 动态回放 | 播放、暂停、重播、拖动建城进度，支持减少动态效果系统设置 |
-| 城市语义 | Build、Run、Verify、Explore、Orchestrate、See、Think、Direct 九类活动 |
-| 身份系统 | 城市名、Agent Archetype、District、City ID、地标解锁 |
-| 分享导出 | 2× PNG、原生 SVG、隐私说明、分享文案复制 |
-| 视觉系统 | Midnight、Aurora、Sunset、Paper；桌面与移动端响应式布局 |
-| 隐私设计 | 不保留提示词、回复、参数、命令、文件路径、工作区名称 |
-| 工程质量 | Node 内置测试、确定性测试、历史迁移、XML 转义、隐私泄漏烟测、CI |
+| 模块         | 能力                                                                  |
+| ------------ | --------------------------------------------------------------------- |
+| 城市生成     | 根据会话节点确定性生成等距程序化城市，相同会话得到稳定结果            |
+| 四种时间范围 | Session / Today / 7-day / All-time，历史按会话去重聚合                |
+| 动态回放     | 播放、暂停、重播、拖动建城进度，支持减少动态效果系统设置              |
+| 城市语义     | Build、Run、Verify、Explore、Orchestrate、See、Think、Direct 九类活动 |
+| 身份系统     | 城市名、Agent Archetype、District、City ID、地标解锁                  |
+| 分享导出     | 2× PNG、原生 SVG、隐私说明、分享文案复制                              |
+| 视觉系统     | Blueprint、Garden、Terracotta、Paper；桌面与移动端响应式布局          |
+| 隐私设计     | 不保留提示词、回复、参数、命令、文件路径、工作区名称                  |
+| 工程质量     | Node 内置测试、确定性测试、历史迁移、XML 转义、隐私泄漏烟测、CI       |
 
 ## 四套城市气候
 
-同一座城市可以切换 Midnight、Aurora、Sunset、Paper 四套完整视觉系统；只改变表达，不改变城市身份和数据。
+同一座城市可以切换 Blueprint、Garden、Terracotta、Paper 四套日光视觉系统；只改变表达，不改变城市身份和数据。为兼容已有浏览器状态，底层仍保留 `midnight`、`aurora`、`sunset` 主题 ID。
 
 ![Agent Skyline 四套城市气候](docs/themes.png)
 
 ## 活动如何变成城市
 
-| Agent 信号 | 城市表达 |
-| --- | --- |
-| 文件读取、编辑、Patch | Build District 建筑群 |
-| Shell、Terminal、Process | Runtime 工业塔 |
-| Test、Lint、Check、Build | Verification Labs |
+| Agent 信号                 | 城市表达              |
+| -------------------------- | --------------------- |
+| 文件读取、编辑、Patch      | Build District 建筑群 |
+| Shell、Terminal、Process   | Runtime 工业塔        |
+| Test、Lint、Check、Build   | Verification Labs     |
 | Web Search、Browser、Fetch | Horizon Observatories |
-| Agent、Workflow、Delegate | Constellation Hubs |
-| Vision、Screenshot、Render | Prism Towers |
-| Thinking、LLM Steps | Thought Spires |
-| User / Conversation Turns | Signal Plazas |
-| 失败后同类操作恢复成功 | Phoenix Tower 地标 |
+| Agent、Workflow、Delegate  | Constellation Hubs    |
+| Vision、Screenshot、Render | Prism Towers          |
+| Thinking、LLM Steps        | Thought Spires        |
+| User / Conversation Turns  | Signal Plazas         |
+| 失败后同类操作恢复成功     | Phoenix Tower 地标    |
 
 映射只保留“类别、结果、时长、时间戳”四类粗粒度信号。原始文本不会进入标准化事件，也不会进入 SVG、PNG、分享文案或本地历史。
 
@@ -76,7 +78,7 @@ npx @deepseek-ai/dsh web
 从 GitHub 安装：
 
 ```bash
-dsh plugin --profile web add "github:LeemanCheung/dsh-agent-skyline#v1.0.0"
+dsh plugin --profile web add "github:LeemanCheung/dsh-agent-skyline#v1.1.0"
 ```
 
 随后在 DSH Web 的 **Settings → Plugins** 中确认 `dsh-agent-skyline` 已启用。插件包已声明 `dsh.bundle.patch`，会在 Web Profile 中注册客户端入口。
@@ -145,11 +147,12 @@ npm run check
 
 ```text
 JavaScript 语法检查
-→ 13 项单元测试
+→ 27 项单元测试
 → DSH 浏览器 Bundle 构建
 → Bundle 语法检查
 → Manifest / Patch / Slot / 隐私烟测
 → 演示资产确定性重建
+→ 已提交媒体 Manifest 校验
 ```
 
 独立执行：
@@ -157,7 +160,10 @@ JavaScript 语法检查
 ```bash
 npm test       # 纯逻辑与隐私测试
 npm run build  # 生成 lib/client.js 与 demo/core.js
-npm run demo   # 重建 docs/preview.svg 与演示页
+npm run demo   # 重建 docs/preview.svg 与 docs/architecture.svg
+npm run determinism   # 双跑并比对 Bundle、SVG 与逐帧 SVG
+npm run assets:verify # 校验已提交媒体尺寸、帧数、字节数与 SHA-256
+npm run pack          # 只读检查 npm 打包清单
 ```
 
 测试会主动注入私密 Prompt、私有文件路径和带 Authorization 的命令，并断言这些字符串不会出现在标准化事件、SVG 或分享文案中。
@@ -196,6 +202,8 @@ scripts/build.mjs
 - [`docs/construction.gif`](docs/construction.gif)：建城过程动图；
 - [`docs/themes.png`](docs/themes.png)：四主题视觉矩阵；
 - [`docs/architecture.svg`](docs/architecture.svg)：隐私架构图；
+- [`docs/assets-manifest.json`](docs/assets-manifest.json)：尺寸、哈希与生成谱系；
+- [`docs/ASSET_REPRODUCTION.md`](docs/ASSET_REPRODUCTION.md)：仅回环网络的资产复现流程；
 - [`docs/validation-report.md`](docs/validation-report.md)：自动化、浏览器渲染与打包验证报告；
 - 中英文 README、CI、Security、Contributing 与 Changelog。
 
@@ -211,7 +219,7 @@ scripts/build.mjs
 
 ## 路线图
 
-v1.1 计划聚焦传播效率而不是堆叠设置：
+后续版本将聚焦传播效率和本地只读联动，而不是堆叠设置：
 
 - 竖版 9:16 小红书 / 抖音分享卡；
 - 可选的匿名“城市种子”导入导出，实现不上传数据的城市交换；

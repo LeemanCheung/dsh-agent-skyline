@@ -14,7 +14,7 @@ for (const theme of Object.keys(THEMES)) {
   const svg = renderSkylineSvg(model, {
     theme,
     projectLabel: 'NORTHSTAR / LOCAL',
-    rangeLabel: `${theme.toUpperCase()} CLIMATE`,
+    rangeLabel: `${THEMES[theme].name.toUpperCase()} CLIMATE`,
   })
   await writeFile(resolve(output, `${theme}.svg`), svg, 'utf8')
 }

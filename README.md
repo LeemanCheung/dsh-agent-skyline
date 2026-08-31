@@ -11,7 +11,7 @@ It is designed as a visual product with a built-in sharing loop rather than anot
 - Session, today, last 7 days, and all-history cities
 - Construction replay with play, pause, restart, and scrubbing
 - PNG / SVG export plus a ready-to-post caption
-- Midnight, Aurora, Sunset, and Paper visual systems
+- Blueprint, Garden, Terracotta, and Paper daylight visual systems
 - Stable city identity, archetype, district, City ID, and unlockable landmarks
 - Browser-only persistence with no server, telemetry, database, or extra model call
 
@@ -19,11 +19,13 @@ It is designed as a visual product with a built-in sharing loop rather than anot
 
 [Interactive demo source](demo/) · [中文说明](README.zh-CN.md) · [Market analysis](docs/market-analysis.zh-CN.md) · [Launch playbook](docs/launch-playbook.zh-CN.md)
 
+> **Release target:** this branch and its screenshots are the reviewed `v1.1.0` daylight redesign. The install command is pinned to the immutable `v1.1.0` tag and becomes available when that tag is published.
+
 ## Install
 
 ```bash
 npx @deepseek-ai/dsh web
-dsh plugin --profile web add "github:LeemanCheung/dsh-agent-skyline#v1.0.0"
+dsh plugin --profile web add "github:LeemanCheung/dsh-agent-skyline#v1.1.0"
 ```
 
 Confirm the plugin in **Settings → Plugins**, then open any Session and select **Agent Skyline** in the conversation header.
@@ -39,7 +41,7 @@ Then open `http://127.0.0.1:4173/`.
 
 ## Four visual climates
 
-The same city can be rendered as Midnight, Aurora, Sunset, or Paper without changing its data identity.
+The same city can be rendered as Blueprint, Garden, Terracotta, or Paper without changing its data identity. The persisted `midnight`, `aurora`, and `sunset` IDs remain compatible with existing browser state.
 
 ![Four Agent Skyline visual climates](docs/themes.png)
 
@@ -59,17 +61,17 @@ The plugin:
 
 ## Signal-to-city mapping
 
-| Agent signal | City representation |
-| --- | --- |
-| Read, edit, patch, write | Build District towers |
-| Shell, terminal, process | Runtime industrial blocks |
-| Test, lint, check, build | Verification Labs |
-| Search, browser, fetch | Horizon Observatories |
-| Agent, workflow, delegate | Constellation Hubs |
-| Vision, screenshot, render | Prism Towers |
-| Reasoning and model steps | Thought Spires |
-| User and conversation turns | Signal Plazas |
-| Failure followed by recovery | Phoenix Tower landmark |
+| Agent signal                 | City representation       |
+| ---------------------------- | ------------------------- |
+| Read, edit, patch, write     | Build District towers     |
+| Shell, terminal, process     | Runtime industrial blocks |
+| Test, lint, check, build     | Verification Labs         |
+| Search, browser, fetch       | Horizon Observatories     |
+| Agent, workflow, delegate    | Constellation Hubs        |
+| Vision, screenshot, render   | Prism Towers              |
+| Reasoning and model steps    | Thought Spires            |
+| User and conversation turns  | Signal Plazas             |
+| Failure followed by recovery | Phoenix Tower landmark    |
 
 ## Development
 
@@ -79,12 +81,15 @@ No runtime dependency is bundled. The build and test pipeline uses Node.js built
 npm run check
 ```
 
-This runs syntax checks, thirteen unit tests, the DSH client build, bundle validation, manifest/slot smoke tests, privacy leak assertions, and deterministic demo generation.
+This runs syntax checks, 27 unit tests, the DSH client build, bundle validation, manifest/slot smoke tests, privacy leak assertions, deterministic documentation-asset generation, and committed-asset manifest verification.
 
 ```bash
 npm test
 npm run build
 npm run demo
+npm run determinism
+npm run assets:verify
+npm run pack
 ```
 
 The privacy suite injects a secret prompt, a private filesystem path, and an authorization-bearing command, then verifies that none can appear in normalized events, SVG exports, or share captions.
@@ -112,6 +117,8 @@ scripts/build.mjs
 - [`docs/construction.gif`](docs/construction.gif) — construction replay
 - [`docs/themes.png`](docs/themes.png) — four-theme visual matrix
 - [`docs/architecture.svg`](docs/architecture.svg) — privacy architecture
+- [`docs/assets-manifest.json`](docs/assets-manifest.json) — dimensions, hashes, and producer lineage
+- [`docs/ASSET_REPRODUCTION.md`](docs/ASSET_REPRODUCTION.md) — loopback-only reproduction workflow
 - [`docs/launch-playbook.zh-CN.md`](docs/launch-playbook.zh-CN.md) — launch sequence and growth loop
 - [`docs/validation-report.md`](docs/validation-report.md) — automated, visual, and packaging evidence
 
@@ -124,6 +131,10 @@ scripts/build.mjs
 - Modern browser support for SVG, Canvas, Blob, and `localStorage`
 - SVG fallback when browser PNG encoding is unavailable
 - `prefers-reduced-motion` support
+
+## Roadmap
+
+Future releases will focus on portable sharing and local-only ecosystem links: vertical social cards, anonymous city-seed exchange, more rare and seasonal landmarks, aggregate-only bridges to `dsh-task-dag` and `dsh-token-usage`, and README / GitHub Profile city badges.
 
 ## License
 

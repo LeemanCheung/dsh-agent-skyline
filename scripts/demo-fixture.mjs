@@ -39,7 +39,7 @@ export function createDemoModel() {
 
   return buildSkyline({
     nodes,
-    sessionKey: 'demo-northstar-session',
+    sessionKey: 'demo-daylight-1',
     projectLabel: 'NORTHSTAR / LOCAL',
     rangeLabel: 'SESSION CITY',
   })

@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-31T10:07:04+08:00",
+  "source": {
+    "fixture": "scripts/demo-fixture.mjs",
+    "core": "src/core.js",
+    "demo": ["demo/index.html", "demo/app.js"],
+    "templates": "scripts/doc-assets",
+    "instructions": "docs/ASSET_REPRODUCTION.md"
+  },
+  "captureEnvironment": {
+    "platform": "Windows NT 10.0; Win64; x64",
+    "playwrightCli": "0.1.18",
+    "chromiumUserAgent": "HeadlessChrome/152.0.0.0",
+    "deviceScaleFactor": 1,
+    "python": "3.12.3",
+    "pillow": "12.1.1",
+    "fonts": [
+      {
+        "file": "segoeui.ttf",
+        "bytes": 955804,
+        "sha256": "ba32a222b23d727267cf1aba4e5296fe84ce99b9d910915103fc085d7931bc88"
+      },
+      {
+        "file": "msyh.ttc",
+        "bytes": 19701556,
+        "sha256": "3084f1f88369af6bf9989c909024164d953d1e38d08734f05f28ef24b2f9d577"
+      }
+    ]
+  },
+  "assets": [
+    {
+      "file": "ui-preview.png",
+      "width": 1440,
+      "height": 1000,
+      "frames": 1,
+      "bytes": 445146,
+      "sha256": "9c5b6606a3f0626ac9d1dfb823047991b48cad415d3b383e6dd44a37dfd827b4",
+      "producer": "Playwright screenshot of the local source-owned demo"
+    },
+    {
+      "file": "mobile-preview.png",
+      "width": 390,
+      "height": 844,
+      "frames": 1,
+      "bytes": 98897,
+      "sha256": "30980716ac014af896580962d5786277ff7c2d958476e015d2775898f2c241f9",
+      "producer": "Playwright screenshot of the local source-owned demo"
+    },
+    {
+      "file": "preview.png",
+      "width": 2400,
+      "height": 1440,
+      "frames": 1,
+      "bytes": 843467,
+      "sha256": "343603f4f32033ca57f71d367e56fde334305adf0576092e7498f224248418cc",
+      "producer": "Demo Export PNG action using the Paper card layout"
+    },
+    {
+      "file": "social-preview.png",
+      "width": 1280,
+      "height": 640,
+      "frames": 1,
+      "bytes": 332200,
+      "sha256": "405cc5cd8f72735584300e5ced87d709ab5e324a0513bfc3bb525df57ef257cd",
+      "producer": "Playwright screenshot of scripts/doc-assets/social-preview.html"
+    },
+    {
+      "file": "themes.png",
+      "width": 1400,
+      "height": 900,
+      "frames": 1,
+      "bytes": 663329,
+      "sha256": "d4e57b2e382407e462c71717edf20c25e272ca050d752df39dd08a33a5679860",
+      "producer": "scripts/render-themes.mjs plus scripts/doc-assets/themes-board.html"
+    },
+    {
+      "file": "construction.gif",
+      "width": 720,
+      "height": 432,
+      "frames": 13,
+      "bytes": 1460034,
+      "sha256": "de59753d8784351a0d638105fa5ff14742336d219bfa50131f7b04ca5f3a0fe3",
+      "producer": "scripts/render-animation.mjs, Playwright frame capture, and Pillow assembly"
+    },
+    {
+      "file": "preview.svg",
+      "width": 1200,
+      "height": 720,
+      "frames": 1,
+      "bytes": 181542,
+      "sha256": "80f755841f26eb664bb48d7758b8e63a3ba904a670cdbfb72ece2718c22f4c51",
+      "producer": "scripts/render-demo.mjs"
+    },
+    {
+      "file": "architecture.svg",
+      "width": 1120,
+      "height": 340,
+      "frames": 1,
+      "bytes": 2719,
+      "sha256": "6d87bb534c186d534c8dfc9528ae88ef1d1c7dd067fb03daf56b4742822430da",
+      "producer": "scripts/render-demo.mjs"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ const {
   createElement: h,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -40,16 +41,27 @@ const zh = {
   "control.exportPng": "导出 PNG",
   "control.copy": "复制分享文案",
   "control.copied": "分享文案已复制",
+  "control.copyFailed": "自动复制失败，文案已显示在侧栏",
+  "control.copyManual": "手动复制分享文案",
+  "control.dismiss": "关闭",
   "control.exported": "城市卡片已导出",
+  "control.exportFallback": "PNG 生成失败，已改为导出 SVG",
   "control.close": "关闭 Agent 天际线",
   "control.reset": "清除本地历史",
   "control.resetDone": "本地历史已清除",
+  "control.resetTitle": "清除本地历史？",
+  "control.resetCancel": "取消",
+  "control.resetAction": "确认清除",
   "control.resetConfirm":
     "清除 Agent 天际线保存在此浏览器中的全部历史？此操作不会影响 DSH 会话。",
   "label.title": "项目署名",
   "label.hint": "默认不读取项目名或路径，可自行填写公开名称。",
   "label.placeholder": "PRIVATE PROJECT",
   "theme.title": "城市气候",
+  "theme.midnight": "蓝图",
+  "theme.aurora": "花园",
+  "theme.sunset": "陶土",
+  "theme.paper": "纸面",
   "timeline.title": "建城进度",
   "metrics.blocks": "城市街区",
   "metrics.tools": "工具动作",
@@ -83,10 +95,17 @@ const en = {
   "control.exportPng": "Export PNG",
   "control.copy": "Copy share caption",
   "control.copied": "Share caption copied",
+  "control.copyFailed": "Copy failed; the caption is shown for manual copy.",
+  "control.copyManual": "Copy caption manually",
+  "control.dismiss": "Dismiss",
   "control.exported": "City card exported",
+  "control.exportFallback": "PNG failed; exported SVG instead",
   "control.close": "Close Agent Skyline",
   "control.reset": "Clear local history",
   "control.resetDone": "Local history cleared",
+  "control.resetTitle": "Clear local history?",
+  "control.resetCancel": "Cancel",
+  "control.resetAction": "Clear history",
   "control.resetConfirm":
     "Clear all Agent Skyline history stored in this browser? DSH sessions are not affected.",
   "label.title": "Public project label",
@@ -94,6 +113,10 @@ const en = {
     "Project names and paths are never read automatically. Add a public label only when safe.",
   "label.placeholder": "PRIVATE PROJECT",
   "theme.title": "City climate",
+  "theme.midnight": "Blueprint",
+  "theme.aurora": "Garden",
+  "theme.sunset": "Terracotta",
+  "theme.paper": "Paper",
   "timeline.title": "Construction progress",
   "metrics.blocks": "City blocks",
   "metrics.tools": "Tool moves",
@@ -335,8 +358,19 @@ function SkylineDialog({
   const [visibleCount, setVisibleCount] = useState(model.buildings.length);
   const [playing, setPlaying] = useState(false);
   const [notice, setNotice] = useState("");
+  const [confirmingReset, setConfirmingReset] = useState(false);
+  const [manualCaption, setManualCaption] = useState("");
   const panelRef = useRef(null);
+  const confirmingResetRef = useRef(false);
+  const resetButtonRef = useRef(null);
+  const resetCancelRef = useRef(null);
+  const resetConfirmationRef = useRef(null);
+  const resetFocusOutcomeRef = useRef(null);
+  const copyButtonRef = useRef(null);
+  const manualCaptionRef = useRef(null);
   const noticeTimerRef = useRef(null);
+  const copyOperationRef = useRef(0);
+  const pngOperationRef = useRef(0);
 
   useEffect(() => {
     setVisibleCount(model.buildings.length);
@@ -358,16 +392,63 @@ function SkylineDialog({
     return () => window.clearInterval(timer);
   }, [playing, model.buildings.length]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const onKeyDown = (event) => {
-      if (event.key !== "Escape") return;
-      event.preventDefault();
-      close();
+      const panel = panelRef.current;
+      if (!panel) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        if (confirmingResetRef.current) {
+          confirmingResetRef.current = false;
+          resetFocusOutcomeRef.current = "trigger";
+          setConfirmingReset(false);
+        } else {
+          close();
+        }
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusRoot = confirmingResetRef.current
+        ? resetConfirmationRef.current
+        : panel;
+      if (!focusRoot) return;
+      const target = CORE.getFocusTrapTarget(
+        focusRoot,
+        document.activeElement,
+        event.shiftKey,
+      );
+      if (target) {
+        event.preventDefault();
+        target.focus();
+      }
     };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     document.addEventListener("keydown", onKeyDown);
     queueMicrotask(() => panelRef.current?.focus());
-    return () => document.removeEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
   }, [close]);
+
+  useLayoutEffect(() => {
+    confirmingResetRef.current = confirmingReset;
+    if (confirmingReset) {
+      resetCancelRef.current?.focus();
+      return;
+    }
+    const outcome = resetFocusOutcomeRef.current;
+    resetFocusOutcomeRef.current = null;
+    if (outcome === "trigger") resetButtonRef.current?.focus();
+    if (outcome === "panel") panelRef.current?.focus();
+  }, [confirmingReset]);
+
+  useLayoutEffect(() => {
+    if (!manualCaption) return;
+    manualCaptionRef.current?.focus();
+    manualCaptionRef.current?.select();
+  }, [manualCaption]);
 
   useEffect(
     () => () => {
@@ -423,33 +504,48 @@ function SkylineDialog({
     showNotice(t("control.exported"));
   };
   const savePng = async () => {
+    const operation = ++pngOperationRef.current;
     try {
       await exportPng(exportSvgText, `${filenameBase}.png`);
-      showNotice(t("control.exported"));
+      if (operation === pngOperationRef.current)
+        showNotice(t("control.exported"));
     } catch {
       exportSvg(exportSvgText, `${filenameBase}.svg`);
-      showNotice(t("control.exported"));
+      if (operation === pngOperationRef.current)
+        showNotice(t("control.exportFallback"));
     }
   };
   const copyCaption = async () => {
+    const operation = ++copyOperationRef.current;
     const caption = CORE.buildShareCaption(model, {
       rangeLabel: t(`range.${range}`),
     });
-    try {
-      await navigator.clipboard.writeText(caption);
-    } catch {
-      const area = document.createElement("textarea");
-      area.value = caption;
-      document.body.appendChild(area);
-      area.select();
-      document.execCommand("copy");
-      area.remove();
+    const copied = await CORE.copyTextWithFallback(caption);
+    if (operation !== copyOperationRef.current) return;
+    if (copied) {
+      setManualCaption("");
+      showNotice(t("control.copied"));
+      queueMicrotask(() => copyButtonRef.current?.focus());
+    } else {
+      setManualCaption(caption);
+      showNotice(t("control.copyFailed"));
     }
-    showNotice(t("control.copied"));
+  };
+  const openResetConfirmation = () => {
+    confirmingResetRef.current = true;
+    resetFocusOutcomeRef.current = null;
+    setConfirmingReset(true);
+  };
+  const closeResetConfirmation = () => {
+    confirmingResetRef.current = false;
+    resetFocusOutcomeRef.current = "trigger";
+    setConfirmingReset(false);
   };
   const resetHistory = () => {
-    if (!window.confirm(t("control.resetConfirm"))) return;
     clearHistory();
+    confirmingResetRef.current = false;
+    resetFocusOutcomeRef.current = "panel";
+    setConfirmingReset(false);
     showNotice(t("control.resetDone"));
   };
 
@@ -458,7 +554,11 @@ function SkylineDialog({
     {
       className: "dsh-skyline-backdrop",
       onPointerDown: (event) => {
-        if (event.currentTarget === event.target) close();
+        if (
+          event.currentTarget === event.target &&
+          !confirmingResetRef.current
+        )
+          close();
       },
     },
     h(
@@ -473,7 +573,11 @@ function SkylineDialog({
       },
       h(
         "header",
-        { className: "dsh-skyline-header" },
+        {
+          className: "dsh-skyline-header",
+          inert: confirmingReset ? "" : undefined,
+          "aria-hidden": confirmingReset || undefined,
+        },
         h(
           "div",
           { className: "dsh-skyline-brand" },
@@ -511,8 +615,9 @@ function SkylineDialog({
         "div",
         {
           className: "dsh-skyline-tabs",
-          role: "tablist",
           "aria-label": t("title"),
+          inert: confirmingReset ? "" : undefined,
+          "aria-hidden": confirmingReset || undefined,
         },
         RANGE_OPTIONS.map((option) =>
           h(
@@ -520,8 +625,7 @@ function SkylineDialog({
             {
               key: option,
               type: "button",
-              role: "tab",
-              "aria-selected": range === option,
+              "aria-pressed": range === option,
               className: "dsh-skyline-tab",
               "data-active": range === option ? "true" : undefined,
               onClick: () => setRange(option),
@@ -532,7 +636,11 @@ function SkylineDialog({
       ),
       h(
         "div",
-        { className: "dsh-skyline-body" },
+        {
+          className: "dsh-skyline-body",
+          inert: confirmingReset ? "" : undefined,
+          "aria-hidden": confirmingReset || undefined,
+        },
         h(
           "main",
           { className: "dsh-skyline-stage-column" },
@@ -541,6 +649,8 @@ function SkylineDialog({
             { className: "dsh-skyline-stage", "data-theme": theme },
             h("div", {
               className: "dsh-skyline-stage-art",
+              // CORE emits a self-contained SVG and XML-escapes every user-facing string.
+              // Privacy and injection regression tests guard this trusted renderer boundary.
               dangerouslySetInnerHTML: { __html: svg },
             }),
             model.metrics.totalEvents === 0
@@ -683,12 +793,24 @@ function SkylineDialog({
                     "data-theme": option,
                     onClick: () => setTheme(option),
                     "aria-pressed": theme === option,
-                    "aria-label": CORE.THEMES[option].name,
-                    title: CORE.THEMES[option].name,
+                    "aria-label": t(`theme.${option}`),
+                    title: t(`theme.${option}`),
                   },
-                  h("span", null),
-                  h("span", null),
-                  h("span", null),
+                  h(
+                    "span",
+                    {
+                      className: "dsh-skyline-theme-bars",
+                      "aria-hidden": true,
+                    },
+                    h("span", null),
+                    h("span", null),
+                    h("span", null),
+                  ),
+                  h(
+                    "span",
+                    { className: "dsh-skyline-theme-name" },
+                    t(`theme.${option}`),
+                  ),
                 ),
               ),
             ),
@@ -741,6 +863,7 @@ function SkylineDialog({
             h(
               "button",
               {
+                ref: copyButtonRef,
                 type: "button",
                 className:
                   "dsh-skyline-secondary-button dsh-skyline-copy-button",
@@ -750,13 +873,51 @@ function SkylineDialog({
               t("control.copy"),
             ),
           ),
+          manualCaption
+            ? h(
+                "section",
+                { className: "dsh-skyline-copy-fallback" },
+                h(
+                  "label",
+                  {
+                    className: "dsh-skyline-field-label",
+                    htmlFor: "dsh-skyline-manual-caption",
+                  },
+                  t("control.copyManual"),
+                ),
+                h("textarea", {
+                  ref: manualCaptionRef,
+                  id: "dsh-skyline-manual-caption",
+                  className: "dsh-skyline-copy-textarea",
+                  readOnly: true,
+                  rows: 5,
+                  value: manualCaption,
+                  onFocus: (event) => event.currentTarget.select(),
+                }),
+                h(
+                  "button",
+                  {
+                    type: "button",
+                    className: "dsh-skyline-copy-dismiss",
+                    onClick: () => {
+                      setManualCaption("");
+                      queueMicrotask(() => copyButtonRef.current?.focus());
+                    },
+                  },
+                  t("control.dismiss"),
+                ),
+              )
+            : null,
           h(
             "button",
             {
+              ref: resetButtonRef,
               type: "button",
               className: "dsh-skyline-reset",
-              onClick: resetHistory,
+              onClick: openResetConfirmation,
               disabled: Object.keys(history.sessions || {}).length === 0,
+              "aria-expanded": confirmingReset,
+              "aria-controls": "dsh-skyline-reset-confirmation",
             },
             t("control.reset"),
           ),
@@ -764,7 +925,11 @@ function SkylineDialog({
       ),
       h(
         "footer",
-        { className: "dsh-skyline-footer" },
+        {
+          className: "dsh-skyline-footer",
+          inert: confirmingReset ? "" : undefined,
+          "aria-hidden": confirmingReset || undefined,
+        },
         h(
           "span",
           { className: "dsh-skyline-footer-shield", "aria-hidden": true },
@@ -772,6 +937,57 @@ function SkylineDialog({
         ),
         h("span", null, t("footer")),
       ),
+      confirmingReset
+        ? h(
+            "div",
+            { className: "dsh-skyline-reset-layer" },
+            h(
+              "div",
+              {
+                ref: resetConfirmationRef,
+                id: "dsh-skyline-reset-confirmation",
+                className: "dsh-skyline-reset-confirmation",
+                role: "alertdialog",
+                "aria-modal": true,
+                "aria-labelledby": "dsh-skyline-reset-title",
+                "aria-describedby": "dsh-skyline-reset-description",
+              },
+              h(
+                "strong",
+                { id: "dsh-skyline-reset-title" },
+                t("control.resetTitle"),
+              ),
+              h(
+                "p",
+                { id: "dsh-skyline-reset-description" },
+                t("control.resetConfirm"),
+              ),
+              h(
+                "div",
+                { className: "dsh-skyline-reset-actions" },
+                h(
+                  "button",
+                  {
+                    ref: resetCancelRef,
+                    type: "button",
+                    className: "dsh-skyline-reset-cancel",
+                    onClick: closeResetConfirmation,
+                  },
+                  t("control.resetCancel"),
+                ),
+                h(
+                  "button",
+                  {
+                    type: "button",
+                    className: "dsh-skyline-reset-confirm",
+                    onClick: resetHistory,
+                  },
+                  t("control.resetAction"),
+                ),
+              ),
+            ),
+          )
+        : null,
       notice
         ? h("div", { className: "dsh-skyline-toast", role: "status" }, notice)
         : null,

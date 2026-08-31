@@ -7,16 +7,15 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing or new release tag (must match package.json)
-        required: false
-        default: v1.0.0
+        description: Existing immutable release tag (must match package.json)
+        required: true
         type: string
 
 permissions:
   contents: write
 
 concurrency:
-  group: agent-skyline-release-${{ github.ref_name }}
+  group: agent-skyline-release-${{ inputs.tag || github.ref_name }}
   cancel-in-progress: false
 
 jobs:
@@ -28,6 +27,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref }}
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -48,10 +48,16 @@ jobs:
             echo "Release tag $tag does not match package version $version ($expected_tag)." >&2
             exit 1
           fi
+          release_sha="$(git rev-parse HEAD)"
+          tag_sha="$(git rev-parse "refs/tags/$tag^{commit}")"
+          if [ "$tag_sha" != "$release_sha" ]; then
+            echo "Checked-out commit $release_sha does not match immutable tag $tag ($tag_sha)." >&2
+            exit 1
+          fi
           mkdir -p dist
           npm pack --pack-destination dist
           zip="dist/dsh-agent-skyline-${tag}.zip"
-          git archive --format=zip --output="$zip" "$GITHUB_SHA"
+          git archive --format=zip --output="$zip" "$release_sha"
           cp docs/social-preview.png dist/agent-skyline-social-preview.png
           cp docs/construction.gif dist/agent-skyline-construction.gif
           test -s "dist/dsh-agent-skyline-${version}.tgz"
@@ -62,6 +68,7 @@ jobs:
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
           echo "version=$version" >> "$GITHUB_OUTPUT"
           echo "zip=$zip" >> "$GITHUB_OUTPUT"
+          echo "release_sha=$release_sha" >> "$GITHUB_OUTPUT"
           cat dist/SHA256SUMS.txt
       - name: Tag and publish GitHub release
         env:
@@ -69,24 +76,18 @@ jobs:
           TAG: ${{ steps.files.outputs.tag }}
           VERSION: ${{ steps.files.outputs.version }}
           ZIP_FILE: ${{ steps.files.outputs.zip }}
-          EVENT_NAME: ${{ github.event_name }}
+          RELEASE_SHA: ${{ steps.files.outputs.release_sha }}
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-
-          if [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
-            gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
-            git tag --delete "$TAG" 2>/dev/null || true
-            git tag --annotate "$TAG" --message "Agent Skyline ${TAG}" "$GITHUB_SHA"
-            git push --force origin "refs/tags/$TAG"
-          else
-            git rev-parse --verify "refs/tags/$TAG" >/dev/null
-            if gh release view "$TAG" >/dev/null 2>&1; then
-              echo "Release $TAG already exists; refusing to overwrite it on a tag push." >&2
-              exit 1
-            fi
+          tag_sha="$(git rev-parse "refs/tags/$TAG^{commit}")"
+          if [ "$tag_sha" != "$RELEASE_SHA" ]; then
+            echo "Tag $TAG moved from validated commit $RELEASE_SHA to $tag_sha; refusing publication." >&2
+            exit 1
+          fi
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; refusing to overwrite it." >&2
+            exit 1
           fi
 
           notes=(--generate-notes)
@@ -101,6 +102,6 @@ jobs:
             dist/agent-skyline-social-preview.png \
             dist/agent-skyline-construction.gif \
             dist/SHA256SUMS.txt \
-            --target "$GITHUB_SHA" \
+            --target "$RELEASE_SHA" \
             --title "Agent Skyline ${TAG}" \
             "${notes[@]}"
