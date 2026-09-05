@@ -210,7 +210,7 @@ scripts/build.mjs
 ## 兼容性与降级
 
 - 面向 DSH Web Profile；
-- `1.1.1` 源码面向 DSH `0.1.2-rc.1`；在隔离 Web Profile 完成安装、加载和日光主题视觉验收前，清单中的该精确版本保持 `unknown`；
+- `1.1.1` 源码已验证兼容 DSH `0.1.2-rc.1` 的插件接口；验证范围和 Provider 无关的边界见 [`docs/compatibility-0.1.2-rc.1.md`](docs/compatibility-0.1.2-rc.1.md)；
 - DSH 当前仍处于开发者预览阶段，建议固定插件 Release Tag，并在每次 DSH 升级后重新执行宿主验收清单；
 - Node.js 构建环境要求 `>= 20`；
 - 浏览器需要支持 React 18、SVG、Canvas、Blob 与 `localStorage`；

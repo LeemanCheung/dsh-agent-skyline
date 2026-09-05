@@ -125,7 +125,7 @@ scripts/build.mjs
 ## Compatibility
 
 - DSH Web Profile
-- The `1.1.1` source targets DSH `0.1.2-rc.1`; the manifest keeps that exact release `unknown` until the isolated Web Profile lifecycle and daylight-theme visual checks are complete
+- The `1.1.1` source is interface-compatible with DSH `0.1.2-rc.1`; see [`docs/compatibility-0.1.2-rc.1.md`](docs/compatibility-0.1.2-rc.1.md) for the verified scope and Provider-independent limits
 - DSH is currently a developer preview; pin the plugin release tag and rerun the host checklist after DSH upgrades
 - Node.js `>= 20` for development
 - React 18 host runtime

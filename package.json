@@ -17,6 +17,7 @@
     "cordis.patch.yml",
     "README.md",
     "README.zh-CN.md",
+    "docs/compatibility-0.1.2-rc.1.md",
     "CHANGELOG.md",
     "SECURITY.md",
     "LICENSE"
@@ -46,7 +47,7 @@
     "compatibility": {
       "dsh": ">=0.1.2-rc.1 <0.2.0",
       "dshReleases": {
-        "0.1.2-rc.1": "unknown"
+        "0.1.2-rc.1": "compatible"
       },
       "profiles": [
         "web"
