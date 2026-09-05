@@ -1,6 +1,6 @@
 {
   "name": "dsh-agent-skyline",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Turn every DeepSeek Harness Agent session into a private, animated, shareable procedural city.",
   "type": "module",
   "main": "lib/index.js",
@@ -37,11 +37,20 @@
     },
     "client": {
       "inject": [
-        "@deepseek-ai/dsh-client-runtime",
         "@deepseek-ai/dsh-client-locale",
-        "@deepseek-ai/dsh-client-ui-conversation"
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-renderer"
       ],
       "platform": "web"
+    },
+    "compatibility": {
+      "dsh": ">=0.1.2-rc.1 <0.2.0",
+      "dshReleases": {
+        "0.1.2-rc.1": "unknown"
+      },
+      "profiles": [
+        "web"
+      ]
     }
   },
   "repository": {
@@ -74,8 +83,8 @@
   },
   "peerDependencies": {
     "@deepseek-ai/dsh-client-locale": "*",
-    "@deepseek-ai/dsh-client-runtime": "*",
-    "@deepseek-ai/dsh-client-ui-conversation": "*",
+    "@deepseek-ai/dsh-client-ui-conversation": "^0.1.2-rc.1",
+    "@deepseek-ai/dsh-client-ui-renderer": "^0.1.2-rc.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -83,10 +92,10 @@
     "@deepseek-ai/dsh-client-locale": {
       "optional": true
     },
-    "@deepseek-ai/dsh-client-runtime": {
+    "@deepseek-ai/dsh-client-ui-conversation": {
       "optional": true
     },
-    "@deepseek-ai/dsh-client-ui-conversation": {
+    "@deepseek-ai/dsh-client-ui-renderer": {
       "optional": true
     }
   },

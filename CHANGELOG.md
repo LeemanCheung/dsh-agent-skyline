@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here.
 
+## [1.1.1] - 2026-09-05
+
+- Migrated the Web client manifest from the removed `dsh-client-runtime` package to the DSH 0.1.2 UI renderer contract while preserving all daylight city themes and stored theme IDs.
+- Added an exact DSH `0.1.2-rc.1` compatibility entry. It remains `unknown` until the isolated Web Profile lifecycle and visual checks are completed.
+- Repaired the npm lockfile contract and made CI run `npm ci` before validation so manifest/lock drift fails immediately.
+
 ## [1.1.0] - 2026-08-31
 
 ### Changed
