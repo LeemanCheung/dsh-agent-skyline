@@ -25,6 +25,13 @@ jobs:
         run: npm ci --ignore-scripts
       - name: Validate source
         run: npm run check
+      - name: Verify deterministic generated artifacts
+        run: npm run determinism
+      - name: Verify committed generated artifacts
+        shell: bash
+        run: |
+          git diff --exit-code HEAD -- lib demo/core.js docs/preview.svg docs/architecture.svg
+          test -z "$(git ls-files --others -- lib)"
       - name: Verify package contents
         run: npm pack --dry-run
       - name: Build tracked-source snapshot

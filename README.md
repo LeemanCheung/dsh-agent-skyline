@@ -19,13 +19,13 @@ It is designed as a visual product with a built-in sharing loop rather than anot
 
 [Interactive demo source](demo/) · [中文说明](README.zh-CN.md) · [Market analysis](docs/market-analysis.zh-CN.md) · [Launch playbook](docs/launch-playbook.zh-CN.md)
 
-> **Release target:** this branch and its screenshots are the reviewed `v1.1.0` daylight redesign. The install command is pinned to the immutable `v1.1.0` tag and becomes available when that tag is published.
+> **Source snapshot:** the package version is `1.1.1`; its release tag has not been published. The install command below uses the existing commit `6aa8b1ea101a11af6ffda0d4d17e3305ace6753e` instead of an unavailable release tag.
 
 ## Install
 
 ```bash
 npx @deepseek-ai/dsh web
-dsh plugin --profile web add "github:LeemanCheung/dsh-agent-skyline#v1.1.0"
+dsh plugin --profile web add "github:LeemanCheung/dsh-agent-skyline#6aa8b1ea101a11af6ffda0d4d17e3305ace6753e"
 ```
 
 Confirm the plugin in **Settings → Plugins**, then open any Session and select **Agent Skyline** in the conversation header.
@@ -82,6 +82,8 @@ npm run check
 ```
 
 This runs syntax checks, 27 unit tests, the DSH client build, bundle validation, manifest/slot smoke tests, privacy leak assertions, deterministic documentation-asset generation, and committed-asset manifest verification.
+
+CI and Release also run `npm run determinism`, compare the rebuilt `lib`, `demo/core.js`, `docs/preview.svg`, and `docs/architecture.svg` with `HEAD` (including staged changes), and reject untracked bundles even when ignored by Git. Include regenerated files when changing their sources.
 
 ```bash
 npm test
