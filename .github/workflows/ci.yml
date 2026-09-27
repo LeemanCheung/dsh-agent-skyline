@@ -31,7 +31,8 @@ jobs:
         shell: bash
         run: |
           git diff --exit-code HEAD -- lib demo/core.js docs/preview.svg docs/architecture.svg
-          test -z "$(git ls-files --others -- lib)"
+          git diff --cached --exit-code HEAD -- lib demo/core.js docs/preview.svg docs/architecture.svg
+          test -z "$(git ls-files --others -- lib demo/core.js docs/preview.svg docs/architecture.svg)"
       - name: Verify package contents
         run: npm pack --dry-run
       - name: Build tracked-source snapshot

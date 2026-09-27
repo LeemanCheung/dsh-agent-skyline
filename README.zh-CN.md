@@ -147,7 +147,7 @@ npm run check
 
 ```text
 JavaScript 语法检查
-→ 27 项单元测试
+→ 33 项自动化测试
 → DSH 浏览器 Bundle 构建
 → Bundle 语法检查
 → Manifest / Patch / Slot / 隐私烟测
@@ -166,7 +166,7 @@ npm run assets:verify # 校验已提交媒体尺寸、帧数、字节数与 SHA-
 npm run pack          # 只读检查 npm 打包清单
 ```
 
-CI 和 Release 还会运行 `npm run determinism`，对比重建后的 `lib`、`demo/core.js`、`docs/preview.svg`、`docs/architecture.svg` 与 `HEAD`，包含已暂存改动，并拒绝未跟踪或被 Git 忽略的 bundle。修改相应源码时应一并提交重建产物。
+CI 和 Release 还会运行 `npm run determinism`，把 `lib`、`demo/core.js`、`docs/preview.svg`、`docs/architecture.svg` 的工作目录和暂存区分别与 `HEAD` 比较，并按同一完整产物清单拒绝未跟踪或被 Git 忽略的文件。回归测试使用隔离 Git 仓库和真实构建脚本，验证已提交删除后重新生成的文件，以及被后续工作目录变化掩盖的暂存区旧产物，都能被两套门禁拒绝。修改相应源码时应一并提交重建产物。
 
 测试会主动注入私密 Prompt、私有文件路径和带 Authorization 的命令，并断言这些字符串不会出现在标准化事件、SVG 或分享文案中。
 

@@ -81,9 +81,9 @@ No runtime dependency is bundled. The build and test pipeline uses Node.js built
 npm run check
 ```
 
-This runs syntax checks, 27 unit tests, the DSH client build, bundle validation, manifest/slot smoke tests, privacy leak assertions, deterministic documentation-asset generation, and committed-asset manifest verification.
+This runs syntax checks, 33 automated tests, the DSH client build, bundle validation, manifest/slot smoke tests, privacy leak assertions, deterministic documentation-asset generation, and committed-asset manifest verification.
 
-CI and Release also run `npm run determinism`, compare the rebuilt `lib`, `demo/core.js`, `docs/preview.svg`, and `docs/architecture.svg` with `HEAD` (including staged changes), and reject untracked bundles even when ignored by Git. Include regenerated files when changing their sources.
+CI and Release also run `npm run determinism`, compare both the rebuilt worktree and staged index for `lib`, `demo/core.js`, `docs/preview.svg`, and `docs/architecture.svg` with `HEAD`, and reject untracked files across that same complete output list even when ignored by Git. Regression tests use isolated Git repositories and the actual build scripts to reject recreated deleted outputs and stale staged artifacts hidden by later worktree changes. Include regenerated files when changing their sources.
 
 ```bash
 npm test
