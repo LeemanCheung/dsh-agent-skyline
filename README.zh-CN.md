@@ -19,7 +19,7 @@
 
 [本地交互演示源码](demo/) · [English README](README.md) · [选题分析](docs/market-analysis.zh-CN.md) · [首发方案](docs/launch-playbook.zh-CN.md)
 
-> **发布目标：** 当前分支及截图对应已完成本地终审的 `v1.1.0` 日光重设计。下方安装命令固定到不可变的 `v1.1.0` Tag，该 Tag 发布后即可使用。
+> **源码快照：** 当前包版本为 `1.1.1`，对应的 Release Tag 尚未发布。下方安装命令固定到已存在的提交 `6aa8b1ea101a11af6ffda0d4d17e3305ace6753e`，可用于安装此源码快照。
 
 ## 为什么它更有传播潜力
 
@@ -78,7 +78,7 @@ npx @deepseek-ai/dsh web
 从 GitHub 安装：
 
 ```bash
-dsh plugin --profile web add "github:LeemanCheung/dsh-agent-skyline#v1.1.0"
+dsh plugin --profile web add "github:LeemanCheung/dsh-agent-skyline#6aa8b1ea101a11af6ffda0d4d17e3305ace6753e"
 ```
 
 随后在 DSH Web 的 **Settings → Plugins** 中确认 `dsh-agent-skyline` 已启用。插件包已声明 `dsh.bundle.patch`，会在 Web Profile 中注册客户端入口。
@@ -147,7 +147,7 @@ npm run check
 
 ```text
 JavaScript 语法检查
-→ 27 项单元测试
+→ 33 项自动化测试
 → DSH 浏览器 Bundle 构建
 → Bundle 语法检查
 → Manifest / Patch / Slot / 隐私烟测
@@ -165,6 +165,8 @@ npm run determinism   # 双跑并比对 Bundle、SVG 与逐帧 SVG
 npm run assets:verify # 校验已提交媒体尺寸、帧数、字节数与 SHA-256
 npm run pack          # 只读检查 npm 打包清单
 ```
+
+CI 和 Release 还会运行 `npm run determinism`，把 `lib`、`demo/core.js`、`docs/preview.svg`、`docs/architecture.svg` 的工作目录和暂存区分别与 `HEAD` 比较，并按同一完整产物清单拒绝未跟踪或被 Git 忽略的文件。回归测试使用隔离 Git 仓库和真实构建脚本，验证已提交删除后重新生成的文件，以及被后续工作目录变化掩盖的暂存区旧产物，都能被两套门禁拒绝。修改相应源码时应一并提交重建产物。
 
 测试会主动注入私密 Prompt、私有文件路径和带 Authorization 的命令，并断言这些字符串不会出现在标准化事件、SVG 或分享文案中。
 

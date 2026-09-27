@@ -33,6 +33,14 @@ jobs:
           node-version: 22
       - name: Validate source and package
         run: npm run check
+      - name: Verify deterministic generated artifacts
+        run: npm run determinism
+      - name: Verify committed generated artifacts
+        shell: bash
+        run: |
+          git diff --exit-code HEAD -- lib demo/core.js docs/preview.svg docs/architecture.svg
+          git diff --cached --exit-code HEAD -- lib demo/core.js docs/preview.svg docs/architecture.svg
+          test -z "$(git ls-files --others -- lib demo/core.js docs/preview.svg docs/architecture.svg)"
       - name: Build release files
         id: files
         env:
